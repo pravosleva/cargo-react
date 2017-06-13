@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 import Button from './Button';
-import AddClientForm from './AddClientForm';
-import ClientList from './ClientList';
+import AddContainerForm from './AddContainerForm';
+import ContainerList from './ContainerList';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      addClientFormOpened: props.defaultAddClientFormOpened,
-      formState: {name: '', email: '', phone: ''},
-      clientList: []
+      addContainerFormOpened: props.defaultAddContainerFormOpened,
+      containerFormState: {name: '', length: '', width: '', height: '', carrying: ''},
+      containerList: []
     }
-    this.updateFormState = this.updateFormState.bind(this);
-    this.saveClient = this.saveClient.bind(this);
-    this.removeClient = this.removeClient.bind(this);
-    this.editClient = this.editClient.bind(this);
-    this.addClientFormToggler = this.addClientFormToggler.bind(this);
+    this.updateContainerFormState = this.updateContainerFormState.bind(this);
+    this.saveContainer = this.saveContainer.bind(this);
+    this.removeContainer = this.removeContainer.bind(this);
+    this.editContainer = this.editContainer.bind(this);
+    this.addContainerFormToggler = this.addContainerFormToggler.bind(this);
   }
-  saveClient(obj) {
+  saveContainer(obj) {
     let _getUUID = () => {
       let newUUID = ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         let r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
@@ -27,64 +27,66 @@ class App extends Component {
       return newUUID;
     };
 
-    let clientList = this.state.clientList;
+    let containerList = this.state.containerList;
     obj.id = _getUUID();
-    clientList.push(obj);
-    this.setState({ clientList });
-    this.updateFormState('clearForm');
-    this.addClientFormToggler(false)
+    containerList.push(obj);
+    this.setState({ containerList });
+    this.updateContainerFormState('clearForm');
+    this.addContainerFormToggler(false)
   }
-  removeClient(id) {
-    let clientList = this.state.clientList.filter( (e, i) => e.id !== id );
-    this.setState({ clientList });
+  removeContainer(id) {
+    let containerList = this.state.containerList.filter( (e, i) => e.id !== id );
+    this.setState({ containerList });
   }
-  updateFormState(propName, e) {
+  updateContainerFormState(propName, e) {
     //console.log(`e.target.value before: ${e.target.value}`);
     switch(propName){
-      case 'name': this.setState({formState: {name: e.target.value, email: this.state.formState.email, phone: this.state.formState.phone}}); break;
-      case 'email': this.setState({formState: {name: this.state.formState.name, email: e.target.value, phone: this.state.formState.phone}}); break;
-      case 'phone': this.setState({formState: {name: this.state.formState.name, email: this.state.formState.email, phone: e.target.value}}); break;
-      case 'clearForm': this.setState({formState: {name: '', email: '', phone: ''}}); break;
+      case 'name': this.setState({containerFormState: {name: e.target.value, length: this.state.containerFormState.length, height: this.state.containerFormState.height, width: this.state.containerFormState.width, carrying: this.state.containerFormState.carrying}}); break;
+      case 'length': this.setState({containerFormState: {name: this.state.containerFormState.name, length: e.target.value, height: this.state.containerFormState.height, width: this.state.containerFormState.width, carrying: this.state.containerFormState.carrying}}); break;
+      case 'height': this.setState({containerFormState: {name: this.state.containerFormState.name, length: this.state.containerFormState.length, height: e.target.value, width: this.state.containerFormState.width, carrying: this.state.containerFormState.carrying}}); break;
+      case 'width': this.setState({containerFormState: {name: this.state.containerFormState.name, length: this.state.containerFormState.length, height: this.state.containerFormState.height, width: e.target.value, carrying: this.state.containerFormState.carrying}}); break;
+      case 'carrying': this.setState({containerFormState: {name: this.state.containerFormState.name, length: this.state.containerFormState.length, height: this.state.containerFormState.height, width: this.state.containerFormState.width, carrying: e.target.value}}); break;
+      case 'clearForm': this.setState({containerFormState: {name: '', length: '', height: '', width: '', carrying:''}}); break;
       default: break;
     }
   }
-  editClient(id) {
-    this.addClientFormToggler(true)
-    let clientToEdit = this.state.clientList.filter( (e, i) => e.id === id )[0];
-    this.setState({ formState: {name: clientToEdit.name, email: clientToEdit.email, phone: clientToEdit.phone} });
-    this.removeClient(id);
+  editContainer(id) {
+    this.addContainerFormToggler(true);
+    let clientToEdit = this.state.containerList.filter( (e, i) => e.id === id )[0];
+    this.setState({ containerFormState: {name: clientToEdit.name, length: clientToEdit.length, height: clientToEdit.height, width: clientToEdit.width} });
+    this.removeContainer(id);
   }
   componentDidUpdate() {
-    //console.log(JSON.stringify(this.state.formState));
+    //console.log(JSON.stringify(this.state.containerFormState));
   }
-  addClientFormToggler(is_it_should_be_opened) {
+  addContainerFormToggler(is_it_should_be_opened) {
     switch(is_it_should_be_opened){
-      case true: this.setState({ addClientFormOpened: is_it_should_be_opened }); break;
+      case true: this.setState({ addContainerFormOpened: is_it_should_be_opened }); break;
       case false:
-        this.setState({ addClientFormOpened: is_it_should_be_opened });
-        this.updateFormState('clearForm');// clear always when the form should be closed manually
+        this.setState({ addContainerFormOpened: is_it_should_be_opened });
+        this.updateContainerFormState('clearForm');// clear always when the form should be closed manually
         break;
-      default: this.setState({ addClientFormOpened: !this.state.addClientFormOpened });
+      default: this.setState({ addContainerFormOpened: !this.state.addContainerFormOpened });
     }
   }
   render() {
     return (
       <div className='App'>
-        <Button handlerClick={ this.addClientFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Добавить клиента ]'} />
-        <Button handlerClick={ () => {console.log(`hello world`)} } iclassName='fa fa-close' tmp={'[ Крестик в правом верхнем углу без функционала ]'} />
-        <AddClientForm
-          addClientFormToggler={this.addClientFormToggler.bind(this)}
-          display={this.state.addClientFormOpened ? 'block' : 'none'}
-          formState={this.state.formState} updateFormState={this.updateFormState}
-          saveClient={this.saveClient} />
-        <ClientList clientList={this.state.clientList} removeClient={this.removeClient} editClient={this.editClient} />
+        <Button handlerClick={ this.addContainerFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
+
+        <AddContainerForm
+          addContainerFormToggler={this.addContainerFormToggler.bind(this)}
+          display={this.state.addContainerFormOpened ? 'block' : 'none'}
+          containerFormState={this.state.containerFormState} updateContainerFormState={this.updateContainerFormState}
+          saveContainer={this.saveContainer} />
+        <ContainerList containerList={this.state.containerList} removeContainer={this.removeContainer} editContainer={this.editContainer} />
       </div>
     );
   }
 }
 
 App.defaultProps={
-  defaultAddClientFormOpened: false,
+  defaultAddContainerFormOpened: true,
 };
 
 export default App;
