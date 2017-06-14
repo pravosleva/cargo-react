@@ -5,9 +5,7 @@ import Button from './Button';
 class AddContainerGroupForm extends Component {
   constructor(props){
     super(props);
-    this.state = {
-
-    }
+    this.state = {}
   }
   saveContainerGroup(){
     let name = this.props.containerGroupFormState.name,
