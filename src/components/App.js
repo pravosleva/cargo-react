@@ -4,6 +4,17 @@ import Button from './Button';
 import AddContainerGroupForm from './AddContainerGroupForm';
 import ContainerGroupList from './ContainerGroupList';
 
+/*
+*                             COMPONENT STRUCTURE
+*
+* - App | state = {name, length, width, height, carrying}
+*   |   |-- AddContainerGroupForm
+*   |   |-- ContainerGroupList
+*   |   |   |-- Cargo
+*   |   |   |   |-- AddProductForm | state = {name}
+*   |   |   |   |-- ProductList
+*/
+
 class App extends Component {
   constructor(props){
     super(props);

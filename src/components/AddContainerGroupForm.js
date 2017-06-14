@@ -32,8 +32,7 @@ class AddContainerGroupForm extends Component {
         <input onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying')} value={this.props.containerGroupFormState.carrying}></input>
         <button onClick={this.saveContainerGroup.bind(this)}>[ Save Container ]</button>
         <br />
-        <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Left Arrow to close Form ]'} />
-        <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Right Arrow to close Form ]'} />
+        <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} />
         <hr />
       </div>
     );

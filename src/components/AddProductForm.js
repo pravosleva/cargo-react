@@ -5,19 +5,13 @@ import Button from './Button';
 class AddProductForm extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      name: ''
-    }
+    this.state = {};
+    this.saveProduct = this.saveProduct.bind(this);
   }
   saveProduct(){
-    let name = this.state.name;
+    let name = this.props.productFormState.name;
     //..
-  }
-  updateForm(propName, e){
-    switch(propName){
-      case 'name': this.setState({name: e.target.value}); break;
-      default: break;
-    }
+    this.props.saveProduct({name});
   }
   render() {
     return (
@@ -25,11 +19,9 @@ class AddProductForm extends Component {
         <hr />
         <strong>AddProductForm</strong><br />
         <label>Name</label>
-        <input onChange={this.updateForm.bind(this, 'name')} value={this.state.name}></input>
+        <input onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
 
-        <button onClick={() => {console.log(`hello world`)}}>[ Save Product ]</button>
-
-        <br /><span>Under construction...</span>
+        <button onClick={this.saveProduct}>[ Save Product ]</button>
         <hr />
       </div>
     );

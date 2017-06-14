@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 //css..
-import AddProductForm from './AddProductForm';
+import Cargo from './Cargo';
 
 class ContainerGroupList extends Component {
   constructor(props){
@@ -13,8 +13,8 @@ class ContainerGroupList extends Component {
       tbody = this.props.containerGroupList.map(
           function(e, i){ return <tr key={i}>
             <td>
-              <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id)} tmp={'[ Edit ]'} />
-              <Button iclassName='fa fa-close' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} tmp={'[ Remove ]'} />
+              <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id)} />
+              <Button iclassName='fa fa-close' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
             </td>
             <td>{e.name}</td>
             <td>{e.length}</td>
@@ -23,7 +23,7 @@ class ContainerGroupList extends Component {
             <td>{e.carrying}</td>
             <td>{e.id}</td>
             <td>
-              <AddProductForm />
+              <Cargo />
             </td>
           </tr>
         },
@@ -37,7 +37,6 @@ class ContainerGroupList extends Component {
             <thead>{thead}</thead>
             <tbody>{tbody}</tbody>
           </table>
-
         </div>
       );
     }else{return null}
