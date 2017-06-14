@@ -1,5 +1,8 @@
 # Cargo calculation based on Clientlist
 
+## Terminology
+Container Group - Group of wagons
+
 Not completed yet...
 
 # Original ReadMe

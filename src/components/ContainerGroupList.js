@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from './Button';
 //css..
 
-class ContainerList extends Component {
+class ContainerGroupList extends Component {
   constructor(props){
     super(props);
 
@@ -16,7 +16,7 @@ class ContainerList extends Component {
     if(this.props.containerGroupList.length!==0){
       return (
         <div>
-          <h2>ContainerList</h2>
+          <h2>ContainerGroupList</h2>
           <table>
             <thead>{thead}</thead>
             <tbody>{tbody}</tbody>
@@ -27,4 +27,4 @@ class ContainerList extends Component {
   }
 }
 
-export default ContainerList;
+export default ContainerGroupList;

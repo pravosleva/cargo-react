@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 import Button from './Button';
-import AddContainerForm from './AddContainerForm';
-import ContainerList from './ContainerList';
+import AddContainerGroupForm from './AddContainerGroupForm';
+import ContainerGroupList from './ContainerGroupList';
 
 class App extends Component {
   constructor(props){
@@ -74,12 +74,12 @@ class App extends Component {
       <div className='App'>
         <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
 
-        <AddContainerForm
+        <AddContainerGroupForm
           addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
           display={this.state.addContainerFormOpened ? 'block' : 'none'}
           containerGroupFormState={this.state.containerGroupFormState} updateContainerGroupFormState={this.updateContainerGroupFormState}
           saveContainerGroup={this.saveContainerGroup} />
-        <ContainerList containerGroupList={this.state.containerGroupList} removeContainerGroup={this.removeContainerGroup} editContainerGroup={this.editContainerGroup} />
+        <ContainerGroupList containerGroupList={this.state.containerGroupList} removeContainerGroup={this.removeContainerGroup} editContainerGroup={this.editContainerGroup} />
       </div>
     );
   }

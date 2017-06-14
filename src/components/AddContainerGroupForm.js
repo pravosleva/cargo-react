@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from './Button';
 //css..
 
-class AddContainerForm extends Component {
+class AddContainerGroupForm extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -21,7 +21,7 @@ class AddContainerForm extends Component {
     return (
       <div style={{display: this.props.display}}>
         <hr />
-        <h2>AddContainerForm</h2>
+        <h2>AddContainerGroupForm</h2>
         <label>Name</label>
         <input onChange={this.props.updateContainerGroupFormState.bind(this, 'name')} value={this.props.containerGroupFormState.name}></input>
         <label>Length</label>
@@ -42,4 +42,4 @@ class AddContainerForm extends Component {
   }
 }
 
-export default AddContainerForm;
+export default AddContainerGroupForm;
