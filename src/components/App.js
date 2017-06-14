@@ -8,17 +8,17 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      addContainerFormOpened: props.defaultAddContainerFormOpened,
-      containerFormState: {name: '', length: '', width: '', height: '', carrying: ''},
-      containerList: []
+      addContainerFormOpened: props.defaultAddContainerGroupFormOpened,
+      containerGroupFormState: {name: '', length: '', width: '', height: '', carrying: ''},
+      containerGroupList: []
     }
-    this.updateContainerFormState = this.updateContainerFormState.bind(this);
-    this.saveContainer = this.saveContainer.bind(this);
-    this.removeContainer = this.removeContainer.bind(this);
-    this.editContainer = this.editContainer.bind(this);
-    this.addContainerFormToggler = this.addContainerFormToggler.bind(this);
+    this.updateContainerGroupFormState = this.updateContainerGroupFormState.bind(this);
+    this.saveContainerGroup = this.saveContainerGroup.bind(this);
+    this.removeContainerGroup = this.removeContainerGroup.bind(this);
+    this.editContainerGroup = this.editContainerGroup.bind(this);
+    this.addContainerGroupFormToggler = this.addContainerGroupFormToggler.bind(this);
   }
-  saveContainer(obj) {
+  saveContainerGroup(obj) {
     let _getUUID = () => {
       let newUUID = ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         let r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
@@ -27,44 +27,44 @@ class App extends Component {
       return newUUID;
     };
 
-    let containerList = this.state.containerList;
+    let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
-    containerList.push(obj);
-    this.setState({ containerList });
-    this.updateContainerFormState('clearForm');
-    this.addContainerFormToggler(false)
+    containerGroupList.push(obj);
+    this.setState({ containerGroupList });
+    this.updateContainerGroupFormState('clearForm');
+    this.addContainerGroupFormToggler(false)
   }
-  removeContainer(id) {
-    let containerList = this.state.containerList.filter( (e, i) => e.id !== id );
-    this.setState({ containerList });
+  removeContainerGroup(id) {
+    let containerGroupList = this.state.containerGroupList.filter( (e, i) => e.id !== id );
+    this.setState({ containerGroupList });
   }
-  updateContainerFormState(propName, e) {
+  updateContainerGroupFormState(propName, e) {
     //console.log(`e.target.value before: ${e.target.value}`);
     switch(propName){
-      case 'name': this.setState({containerFormState: {name: e.target.value, length: this.state.containerFormState.length, height: this.state.containerFormState.height, width: this.state.containerFormState.width, carrying: this.state.containerFormState.carrying}}); break;
-      case 'length': this.setState({containerFormState: {name: this.state.containerFormState.name, length: e.target.value, height: this.state.containerFormState.height, width: this.state.containerFormState.width, carrying: this.state.containerFormState.carrying}}); break;
-      case 'height': this.setState({containerFormState: {name: this.state.containerFormState.name, length: this.state.containerFormState.length, height: e.target.value, width: this.state.containerFormState.width, carrying: this.state.containerFormState.carrying}}); break;
-      case 'width': this.setState({containerFormState: {name: this.state.containerFormState.name, length: this.state.containerFormState.length, height: this.state.containerFormState.height, width: e.target.value, carrying: this.state.containerFormState.carrying}}); break;
-      case 'carrying': this.setState({containerFormState: {name: this.state.containerFormState.name, length: this.state.containerFormState.length, height: this.state.containerFormState.height, width: this.state.containerFormState.width, carrying: e.target.value}}); break;
-      case 'clearForm': this.setState({containerFormState: {name: '', length: '', height: '', width: '', carrying:''}}); break;
+      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length: this.state.containerGroupFormState.length, height: this.state.containerGroupFormState.height, width: this.state.containerGroupFormState.width, carrying: this.state.containerGroupFormState.carrying}}); break;
+      case 'length': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: e.target.value, height: this.state.containerGroupFormState.height, width: this.state.containerGroupFormState.width, carrying: this.state.containerGroupFormState.carrying}}); break;
+      case 'height': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: this.state.containerGroupFormState.length, height: e.target.value, width: this.state.containerGroupFormState.width, carrying: this.state.containerGroupFormState.carrying}}); break;
+      case 'width': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: this.state.containerGroupFormState.length, height: this.state.containerGroupFormState.height, width: e.target.value, carrying: this.state.containerGroupFormState.carrying}}); break;
+      case 'carrying': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: this.state.containerGroupFormState.length, height: this.state.containerGroupFormState.height, width: this.state.containerGroupFormState.width, carrying: e.target.value}}); break;
+      case 'clearForm': this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:''}}); break;
       default: break;
     }
   }
-  editContainer(id) {
-    this.addContainerFormToggler(true);
-    let clientToEdit = this.state.containerList.filter( (e, i) => e.id === id )[0];
-    this.setState({ containerFormState: {name: clientToEdit.name, length: clientToEdit.length, height: clientToEdit.height, width: clientToEdit.width} });
-    this.removeContainer(id);
+  editContainerGroup(id) {
+    this.addContainerGroupFormToggler(true);
+    let containerGroupToEdit = this.state.containerGroupList.filter( (e, i) => e.id === id )[0];
+    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width} });
+    this.removeContainerGroup(id);
   }
   componentDidUpdate() {
-    //console.log(JSON.stringify(this.state.containerFormState));
+    //console.log(JSON.stringify(this.state.containerGroupFormState));
   }
-  addContainerFormToggler(is_it_should_be_opened) {
+  addContainerGroupFormToggler(is_it_should_be_opened) {
     switch(is_it_should_be_opened){
       case true: this.setState({ addContainerFormOpened: is_it_should_be_opened }); break;
       case false:
         this.setState({ addContainerFormOpened: is_it_should_be_opened });
-        this.updateContainerFormState('clearForm');// clear always when the form should be closed manually
+        this.updateContainerGroupFormState('clearForm');// clear always when the form should be closed manually
         break;
       default: this.setState({ addContainerFormOpened: !this.state.addContainerFormOpened });
     }
@@ -72,21 +72,21 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Button handlerClick={ this.addContainerFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
+        <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
 
         <AddContainerForm
-          addContainerFormToggler={this.addContainerFormToggler.bind(this)}
+          addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
           display={this.state.addContainerFormOpened ? 'block' : 'none'}
-          containerFormState={this.state.containerFormState} updateContainerFormState={this.updateContainerFormState}
-          saveContainer={this.saveContainer} />
-        <ContainerList containerList={this.state.containerList} removeContainer={this.removeContainer} editContainer={this.editContainer} />
+          containerGroupFormState={this.state.containerGroupFormState} updateContainerGroupFormState={this.updateContainerGroupFormState}
+          saveContainerGroup={this.saveContainerGroup} />
+        <ContainerList containerGroupList={this.state.containerGroupList} removeContainerGroup={this.removeContainerGroup} editContainerGroup={this.editContainerGroup} />
       </div>
     );
   }
 }
 
 App.defaultProps={
-  defaultAddContainerFormOpened: true,
+  defaultAddContainerGroupFormOpened: true,
 };
 
 export default App;
