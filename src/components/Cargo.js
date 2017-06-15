@@ -64,7 +64,7 @@ class Cargo extends Component {
   render() {
     return (
       <div>
-        <h3>Cargo</h3>
+        {/*<h3>Cargo</h3>*/}
         <span>Product list for the Container group.</span>
 
         <div className='text-right' style={{marginBottom:'5px'}}>

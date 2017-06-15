@@ -1,9 +1,19 @@
-# Cargo calculation based on Clientlist
+# Cargo calculation based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
 
 ## Terminology
-Container Group - Group of wagons
+- Container Group - Group of Containers one and the same type (dimentions and carrying).
+- Product - one unit of equipment to transport in this Container Group.
 
-Not completed yet...
+_Under construction yet..._
+
+## Task Lists
+
+- [x] Container Group parameters
+- [ ] Product parameters
+- [ ] Wagon numbers for each Container Group calculation
+- [ ] Send results to Back-end
+
+_Under construction yet..._
 
 # Original ReadMe
 
