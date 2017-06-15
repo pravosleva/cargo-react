@@ -16,13 +16,15 @@ class AddProductForm extends Component {
   render() {
     return (
       <div style={{display: this.props.display}}>
-        <hr />
-        <strong>AddProductForm</strong><br />
-        <label>Name</label>
-        <input onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
+        <div className='well well-sm'>
+          <h4>AddProductForm</h4>
+          <label>Name</label>
+          <input onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
 
-        <button onClick={this.saveProduct}>[ Save Product ]</button>
-        <hr />
+          <div className='text-right'>
+            <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='[ Save Product ]'></Button>
+          </div>
+        </div>
       </div>
     );
   }

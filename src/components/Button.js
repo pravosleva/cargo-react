@@ -9,7 +9,7 @@ class Button extends Component {
   handlerClick() { this.props.handlerClick() }
   render() {
     return (
-      <button onClick={this.handlerClick}>
+      <button className="btn btn-sm btn-default" onClick={this.handlerClick}>
         <i className={this.props.iclassName}></i>{this.props.tmp?` ${this.props.tmp}`:``}
       </button>
     );

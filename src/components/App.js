@@ -82,8 +82,11 @@ class App extends Component {
   }
   render() {
     return (
-      <div className='App'>
-        <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
+      <div className='container'>
+        <h1>Cargo-React</h1>
+        <div className='text-center' style={{marginBottom:'20px'}}>
+          <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
+        </div>
 
         <AddContainerGroupForm
           addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}

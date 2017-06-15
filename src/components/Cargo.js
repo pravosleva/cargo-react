@@ -64,9 +64,13 @@ class Cargo extends Component {
   render() {
     return (
       <div>
-        <strong>Cargo</strong><br />
-        <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
-        <Button handlerClick={ this.addProductFormToggler.bind(this, false) } iclassName='fa fa-close' />
+        <h3>Cargo</h3>
+        <span>Product list for the Container group.</span>
+
+        <div className='text-right' style={{marginBottom:'5px'}}>
+          <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
+          <Button handlerClick={ this.addProductFormToggler.bind(this, false) } iclassName='fa fa-close' />
+        </div>
 
         <AddProductForm
           addProductFormToggler={this.addProductFormToggler}
@@ -76,6 +80,7 @@ class Cargo extends Component {
           saveProduct={this.saveProduct} />
         <ProductList
           productList={this.state.productList} removeProduct={this.removeProduct} editProduct={this.editProduct} />
+
       </div>
     );
   }

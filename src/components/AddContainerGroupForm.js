@@ -18,22 +18,24 @@ class AddContainerGroupForm extends Component {
   render() {
     return (
       <div style={{display: this.props.display}}>
-        <hr />
-        <h2>AddContainerGroupForm</h2>
-        <label>Name</label>
-        <input onChange={this.props.updateContainerGroupFormState.bind(this, 'name')} value={this.props.containerGroupFormState.name}></input>
-        <label>Length</label>
-        <input onChange={this.props.updateContainerGroupFormState.bind(this, 'length')} value={this.props.containerGroupFormState.length}></input>
-        <label>Width</label>
-        <input onChange={this.props.updateContainerGroupFormState.bind(this, 'width')} value={this.props.containerGroupFormState.width}></input>
-        <label>Height</label>
-        <input onChange={this.props.updateContainerGroupFormState.bind(this, 'height')} value={this.props.containerGroupFormState.height}></input>
-        <label>Carrying</label>
-        <input onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying')} value={this.props.containerGroupFormState.carrying}></input>
-        <button onClick={this.saveContainerGroup.bind(this)}>[ Save Container ]</button>
-        <br />
-        <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} />
-        <hr />
+        <div className='well well-sm'>
+          <h4>AddContainerGroupForm</h4>
+          <label>Name</label>
+          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'name')} value={this.props.containerGroupFormState.name}></input>
+          <label>Length, mm</label>
+          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'length')} value={this.props.containerGroupFormState.length}></input>
+          <label>Width, mm</label>
+          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'width')} value={this.props.containerGroupFormState.width}></input>
+          <label>Height, mm</label>
+          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'height')} value={this.props.containerGroupFormState.height}></input>
+          <label>Carrying, kg</label>
+          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying')} value={this.props.containerGroupFormState.carrying}></input>
+
+          <div className='text-right'>
+            <Button handlerClick={this.saveContainerGroup.bind(this)} iclassName='fa fa-plus' tmp='[ Save Container ]'></Button>
+            <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} />
+          </div>
+        </div>
       </div>
     );
   }

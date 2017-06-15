@@ -23,8 +23,8 @@ class ProductList extends Component {
     if(this.props.productList.length!==0){
       return (
         <div>
-          <strong>ProductList</strong><br />
-          <table>
+          {/*<h3>ProductList</h3>*/}
+          <table className="table table-condensed">
             <thead>{thead}</thead>
             <tbody>{tbody}</tbody>
           </table>

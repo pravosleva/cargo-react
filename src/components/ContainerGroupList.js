@@ -9,7 +9,7 @@ class ContainerGroupList extends Component {
 
   }
   render() {
-    let thead = <tr><th></th><th>Name</th><th>Length</th><th>Width</th><th>Height</th><th>Carrying</th><th>id</th></tr>,
+    let thead = <tr><th></th><th>Name</th><th>Length, mm</th><th>Width, mm</th><th>Height, mm</th><th>Carrying, kg</th><th>Cargo</th></tr>,
       tbody = this.props.containerGroupList.map(
           function(e, i){ return <tr key={i}>
             <td>
@@ -21,7 +21,6 @@ class ContainerGroupList extends Component {
             <td>{e.width}</td>
             <td>{e.height}</td>
             <td>{e.carrying}</td>
-            <td>{e.id}</td>
             <td>
               <Cargo />
             </td>
@@ -33,7 +32,7 @@ class ContainerGroupList extends Component {
       return (
         <div>
           <h2>ContainerGroupList</h2>
-          <table>
+          <table className="table table-condensed">
             <thead>{thead}</thead>
             <tbody>{tbody}</tbody>
           </table>
