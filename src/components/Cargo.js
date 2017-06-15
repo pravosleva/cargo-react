@@ -68,8 +68,10 @@ class Cargo extends Component {
         <span>Product list for the Container group.</span>
 
         <div className='text-right' style={{marginBottom:'5px'}}>
-          <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
-          <Button handlerClick={ this.addProductFormToggler.bind(this, false) } iclassName='fa fa-close' />
+          <div className='btn-group' role='group'>
+            <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
+            <Button handlerClick={ this.addProductFormToggler.bind(this, false) } iclassName='fa fa-close' />
+          </div>
         </div>
 
         <AddProductForm

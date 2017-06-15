@@ -10,8 +10,8 @@ import ContainerGroupList from './ContainerGroupList';
 * - App | state = {name, length, width, height, carrying}
 *   |   |-- AddContainerGroupForm
 *   |   |-- ContainerGroupList
-*   |   |   |-- Cargo
-*   |   |   |   |-- AddProductForm | state = {name}
+*   |   |   |-- Cargo | {addProductFormOpened, productFormState, productList}
+*   |   |   |   |-- AddProductForm
 *   |   |   |   |-- ProductList
 */
 

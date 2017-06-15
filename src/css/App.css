@@ -1,8 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.hidden{
-  /*visibility: hidden;*/
-  display: none;
+.borderless td, .borderless th {
+  border: none !important;
 }

@@ -22,7 +22,7 @@ class AddProductForm extends Component {
           <input onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
 
           <div className='text-right'>
-            <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='[ Save Product ]'></Button>
+            <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='[ Save Product ]' bsBtnClassName={`btn-primary`}></Button>
           </div>
         </div>
       </div>

@@ -13,8 +13,10 @@ class ContainerGroupList extends Component {
       tbody = this.props.containerGroupList.map(
           function(e, i){ return <tr key={i}>
             <td>
-              <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id)} />
-              <Button iclassName='fa fa-close' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
+              <div className='btn-group' role='group'>
+                <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id)} />
+                <Button iclassName='fa fa-close' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
+              </div>
             </td>
             <td>{e.name}</td>
             <td>{e.length}</td>

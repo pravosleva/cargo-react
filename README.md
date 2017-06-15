@@ -10,6 +10,7 @@ _Under construction yet..._
 
 - [x] Container Group parameters
 - [ ] Product parameters
+- [ ] Need to keep product list in the main state
 - [ ] Wagon numbers for each Container Group calculation
 - [ ] Send results to Back-end
 

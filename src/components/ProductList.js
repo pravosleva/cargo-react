@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 //css..
+import '../css/App.css';
 
 class ProductList extends Component {
   constructor(props){
@@ -12,8 +13,10 @@ class ProductList extends Component {
       tbody = this.props.productList.map(
           function(e, i){ return <tr key={i}>
             <td>
-              <Button iclassName='fa fa-pencil' handlerClick={this.props.editProduct.bind(this, e.id)} />
-              <Button iclassName='fa fa-close' handlerClick={this.props.removeProduct.bind(this, e.id)} />
+              <div className='btn-group' role='group'>
+                <Button iclassName='fa fa-pencil' handlerClick={this.props.editProduct.bind(this, e.id)} />
+                <Button iclassName='fa fa-close' handlerClick={this.props.removeProduct.bind(this, e.id)} />
+              </div>
             </td>
             <td>{e.name}</td>
           </tr>
@@ -24,7 +27,7 @@ class ProductList extends Component {
       return (
         <div>
           {/*<h3>ProductList</h3>*/}
-          <table className="table table-condensed">
+          <table className="table table-condensed borderless">
             <thead>{thead}</thead>
             <tbody>{tbody}</tbody>
           </table>
