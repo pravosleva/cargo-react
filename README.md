@@ -1,18 +1,22 @@
 # Cargo calculation based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
 
 ## Terminology
-- Container Group - Group of Containers one and the same type (dimentions and carrying).
+
+- Container Group - Group of Containers one and the same type (dimentions and carrying). It is Motorcade of the Waggons (Containers).
 - Product - one unit of equipment to transport in this Container Group.
+- Cargo - productlist for the Container Group
 
 _Under construction yet..._
 
-## Task Lists
+## Tasklist
 
 - [x] Container Group parameters
-- [ ] Product parameters
-- [ ] Need to keep product list in the main state
-- [ ] Wagon numbers for each Container Group calculation
+- [ ] Product parameters (Length x Width x Height, Weight)
+- [ ] Need to keep productlist for each Container Group in the App state (see method `_updateProductListForContainerGroup(obj)` in App.js)
 - [ ] Send results to Back-end
+- [ ] Back-end: Wagon numbers for each Container Group calculation
+- [ ] Render 3D model in mew window
+- [ ] Link to 3D model for other users
 
 _Under construction yet..._
 

@@ -17,6 +17,10 @@ class Cargo extends Component {
     this.removeProduct = this.removeProduct.bind(this);
     this.editProduct = this.editProduct.bind(this);
     this.addProductFormToggler = this.addProductFormToggler.bind(this);
+    this._updateProductListForContainerGroup = this._updateProductListForContainerGroup.bind(this);
+  }
+  _updateProductListForContainerGroup(productList) {
+    this.props.updateProductListForContainerGroup({productList, containerId:this.props.containerId})
   }
   saveProduct(obj) {
     let _getUUID = () => {
@@ -32,11 +36,15 @@ class Cargo extends Component {
     productList.push(obj);
     this.setState({ productList });
     this.updateProductFormState('clearForm');
-    this.addProductFormToggler(false)
+    this.addProductFormToggler(false);
+
+    this._updateProductListForContainerGroup(productList);
   }
   removeProduct(id) {
     let productList = this.state.productList.filter( (e, i) => e.id !== id );
     this.setState({ productList });
+
+    this._updateProductListForContainerGroup(productList);
   }
   updateProductFormState(propName, e) {
     switch(propName){
@@ -68,10 +76,7 @@ class Cargo extends Component {
         <span>Product list for the Container group.</span>
 
         <div className='text-right' style={{marginBottom:'5px'}}>
-          <div className='btn-group' role='group'>
-            <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
-            <Button handlerClick={ this.addProductFormToggler.bind(this, false) } iclassName='fa fa-close' />
-          </div>
+          <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
         </div>
 
         <AddProductForm

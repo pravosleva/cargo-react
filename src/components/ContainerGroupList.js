@@ -8,6 +8,9 @@ class ContainerGroupList extends Component {
     super(props);
 
   }
+  updateProductListForContainerGroup() {
+
+  }
   render() {
     let thead = <tr><th></th><th>Name</th><th>Length, mm</th><th>Width, mm</th><th>Height, mm</th><th>Carrying, kg</th><th>Cargo</th></tr>,
       tbody = this.props.containerGroupList.map(
@@ -24,7 +27,7 @@ class ContainerGroupList extends Component {
             <td>{e.height}</td>
             <td>{e.carrying}</td>
             <td>
-              <Cargo />
+              <Cargo containerId={e.id} updateProductListForContainerGroup={this.props.updateProductListForContainerGroup} />
             </td>
           </tr>
         },

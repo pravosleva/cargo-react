@@ -10,7 +10,7 @@ import ContainerGroupList from './ContainerGroupList';
 * - App | state = {name, length, width, height, carrying}
 *   |   |-- AddContainerGroupForm
 *   |   |-- ContainerGroupList
-*   |   |   |-- Cargo | {addProductFormOpened, productFormState, productList}
+*   |   |   |-- Cargo | state = {addProductFormOpened, productFormState, productList}
 *   |   |   |   |-- AddProductForm
 *   |   |   |   |-- ProductList
 */
@@ -28,6 +28,7 @@ class App extends Component {
     this.removeContainerGroup = this.removeContainerGroup.bind(this);
     this.editContainerGroup = this.editContainerGroup.bind(this);
     this.addContainerGroupFormToggler = this.addContainerGroupFormToggler.bind(this);
+    this._updateProductListForContainerGroup = this._updateProductListForContainerGroup.bind(this);
   }
   saveContainerGroup(obj) {
     let _getUUID = () => {
@@ -80,6 +81,13 @@ class App extends Component {
       default: this.setState({ addContainerFormOpened: !this.state.addContainerFormOpened });
     }
   }
+  _updateProductListForContainerGroup(obj) {
+    // obj = {productList, containerId}
+    // Need to save the productList for Container Group to this state...
+
+    console.log(obj);
+    
+  }
   render() {
     return (
       <div className='container'>
@@ -91,9 +99,14 @@ class App extends Component {
         <AddContainerGroupForm
           addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
           display={this.state.addContainerFormOpened ? 'block' : 'none'}
-          containerGroupFormState={this.state.containerGroupFormState} updateContainerGroupFormState={this.updateContainerGroupFormState}
+          containerGroupFormState={this.state.containerGroupFormState}
+          updateContainerGroupFormState={this.updateContainerGroupFormState}
           saveContainerGroup={this.saveContainerGroup} />
-        <ContainerGroupList containerGroupList={this.state.containerGroupList} removeContainerGroup={this.removeContainerGroup} editContainerGroup={this.editContainerGroup} />
+        <ContainerGroupList
+          containerGroupList={this.state.containerGroupList}
+          removeContainerGroup={this.removeContainerGroup}
+          editContainerGroup={this.editContainerGroup}
+          updateProductListForContainerGroup={this._updateProductListForContainerGroup} />
       </div>
     );
   }

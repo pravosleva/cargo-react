@@ -23,8 +23,11 @@ class AddProductForm extends Component {
           <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
 
           <div className='text-right' style={{marginTop:'10px'}}>
-            <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='[ Save Product ]' bsBtnClassName={`btn-primary`}></Button>
-          </div>
+            <div className='btn-group' role='group'>
+              <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='[ Save Product ]' bsBtnClassName={`btn-primary`}></Button>
+              <Button handlerClick={this.props.addProductFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} bsBtnClassName={`btn-danger`} />
+            </div>
+        </div>
         </div>
 
       </div>

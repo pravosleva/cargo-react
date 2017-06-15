@@ -37,7 +37,7 @@ class AddContainerGroupForm extends Component {
                 <label>Height, mm</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'height')} value={this.props.containerGroupFormState.height}></input>
               </div>
-              <p>Enter parameters each Container of this containerGroup.</p>
+              <p>Enter parameters for each Container of this containerGroup.</p>
             </div>
           </div>
 
