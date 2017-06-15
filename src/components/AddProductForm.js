@@ -15,16 +15,18 @@ class AddProductForm extends Component {
   }
   render() {
     return (
-      <div style={{display: this.props.display}}>
-        <div className='well well-sm'>
-          <h4>AddProductForm</h4>
-          <label>Name</label>
-          <input onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
+      <div className='panel panel-default' style={{display: this.props.display}}>
 
-          <div className='text-right'>
+        <div className='panel-heading'>AddProductForm</div>
+        <div className='panel-body'>
+          <label>Name</label>
+          <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
+
+          <div className='text-right' style={{marginTop:'10px'}}>
             <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='[ Save Product ]' bsBtnClassName={`btn-primary`}></Button>
           </div>
         </div>
+
       </div>
     );
   }

@@ -18,25 +18,38 @@ class AddContainerGroupForm extends Component {
   render() {
     return (
       <div style={{display: this.props.display}}>
-        <div className='well well-sm'>
-          <h4>AddContainerGroupForm</h4>
-          <label>Name</label>
-          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'name')} value={this.props.containerGroupFormState.name}></input>
-          <label>Length, mm</label>
-          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'length')} value={this.props.containerGroupFormState.length}></input>
-          <label>Width, mm</label>
-          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'width')} value={this.props.containerGroupFormState.width}></input>
-          <label>Height, mm</label>
-          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'height')} value={this.props.containerGroupFormState.height}></input>
-          <label>Carrying, kg</label>
-          <input onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying')} value={this.props.containerGroupFormState.carrying}></input>
+        <div className='panel panel-default'>
+          <div className='panel-heading'>AddContainerGroupForm</div>
 
-          <div className='text-right'>
-            <div className='btn-group' role='group'>
-              <Button handlerClick={this.saveContainerGroup.bind(this)} iclassName='fa fa-plus' tmp='[ Save Container ]' bsBtnClassName={`btn-primary`} ></Button>
-              <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} bsBtnClassName={`btn-danger`} />
+          <div className='panel-body'>
+            <div className='row' style={{paddingLeft:'30px', paddingRight:'30px'}}>
+              <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                <label>Name</label>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'name')} value={this.props.containerGroupFormState.name}></input>
+                <label>Carrying, kg</label>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying')} value={this.props.containerGroupFormState.carrying}></input>
+              </div>
+              <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                <label>Length, mm</label>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'length')} value={this.props.containerGroupFormState.length}></input>
+                <label>Width, mm</label>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'width')} value={this.props.containerGroupFormState.width}></input>
+                <label>Height, mm</label>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'height')} value={this.props.containerGroupFormState.height}></input>
+              </div>
+              <p>Enter parameters each Container of this containerGroup.</p>
             </div>
           </div>
+
+          <div className='panel-footer'>
+            <div className='text-right'>
+              <div className='btn-group' role='group'>
+                <Button handlerClick={this.saveContainerGroup.bind(this)} iclassName='fa fa-plus' tmp='[ Save Container ]' bsBtnClassName={`btn-primary`} ></Button>
+                <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} bsBtnClassName={`btn-danger`} />
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     );
