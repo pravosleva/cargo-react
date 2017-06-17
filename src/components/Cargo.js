@@ -9,7 +9,7 @@ class Cargo extends Component {
     super(props);
     this.state = {
       addProductFormOpened: false,
-      productFormState: {name: ''}
+      productFormState: {name: '', length: '', width: '', height: '', weight: ''}
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
     this.saveProduct = this.saveProduct.bind(this);
@@ -33,7 +33,6 @@ class Cargo extends Component {
     let productList = this.props.productList;
     obj.id = _getUUID();
     productList.push(obj);
-    this.setState({ productList });
     this.updateProductFormState('clearForm');
     this.addProductFormToggler(false);
 
@@ -47,15 +46,19 @@ class Cargo extends Component {
   }
   updateProductFormState(propName, e) {
     switch(propName){
-      case 'name': this.setState({productFormState: {name: e.target.value}}); break;
-      case 'clearForm': this.setState({productFormState: {name: ''}}); break;
+      case 'name': this.setState({productFormState: {name: e.target.value, length: this.state.productFormState.length, width: this.state.productFormState.width, height: this.state.productFormState.height, weight: this.state.productFormState.weight}}); break;
+      case 'length': this.setState({productFormState: {name: this.state.productFormState.name, length: e.target.value, width: this.state.productFormState.width, height: this.state.productFormState.height, weight: this.state.productFormState.weight}}); break;
+      case 'width': this.setState({productFormState: {name: this.state.productFormState.name, length: this.state.productFormState.length, width: e.target.value, height: this.state.productFormState.height, weight: this.state.productFormState.weight}}); break;
+      case 'height': this.setState({productFormState: {name: this.state.productFormState.name, length: this.state.productFormState.length, width: this.state.productFormState.width, height: e.target.value, weight: this.state.productFormState.weight}}); break;
+      case 'weight': this.setState({productFormState: {name: this.state.productFormState.name, length: this.state.productFormState.length, width: this.state.productFormState.width, height: this.state.productFormState.height, weight: e.target.value}}); break;
+      case 'clearForm': this.setState({productFormState: {name: '', length: '', width: '', height: '', weight: ''}}); break;
       default: break;
     }
   }
   editProduct(id) {
     this.addProductFormToggler(true);
     let productToEdit = this.props.productList.filter( (e, i) => e.id === id )[0];
-    this.setState({ productFormState: {name: productToEdit.name} });
+    this.setState({ productFormState: {name: productToEdit.name, length: productToEdit.length, width: productToEdit.width, height: productToEdit.height, weight: productToEdit.weight} });
     this.removeProduct(id);
   }
   addProductFormToggler(is_it_should_be_opened) {
@@ -85,7 +88,9 @@ class Cargo extends Component {
           updateProductFormState={this.updateProductFormState}
           saveProduct={this.saveProduct} />
         <ProductList
-          productList={this.props.productList} removeProduct={this.removeProduct} editProduct={this.editProduct} />
+          productList={this.props.productList}
+          removeProduct={this.removeProduct}
+          editProduct={this.editProduct} />
 
       </div>
     );

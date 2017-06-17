@@ -7,10 +7,19 @@ import ContainerGroupList from './ContainerGroupList';
 /*
 *                             COMPONENT STRUCTURE
 *
-* - App | state = {name, length, width, height, carrying}
+* - App
+    state = {
+      addContainerFormOpened: bool,
+      containerGroupFormState: {name: str, length: num, width: num, height: num, carrying: num, productList: arr},
+      containerGroupList: arr
+    }
 *   |   |-- AddContainerGroupForm
 *   |   |-- ContainerGroupList
-*   |   |   |-- Cargo | state = {addProductFormOpened, productFormState, productList}
+*   |   |   |-- Cargo
+                state = {
+                  addProductFormOpened: bool,
+                  productFormState: {name: str, length: num, width: num, height: num, weight: num}
+                }
 *   |   |   |   |-- AddProductForm
 *   |   |   |   |-- ProductList
 */
@@ -20,7 +29,7 @@ class App extends Component {
     super(props);
     this.state = {
       addContainerFormOpened: props.defaultAddContainerGroupFormOpened,
-      containerGroupFormState: {name: '', length: '', width: '', height: '', carrying: ''},
+      containerGroupFormState: {name: '', length: '', width: '', height: '', carrying: '', productList:[]},
       containerGroupList: []
     }
     this.updateContainerGroupFormState = this.updateContainerGroupFormState.bind(this);
@@ -41,7 +50,7 @@ class App extends Component {
 
     let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
-    obj.productList = [];
+    obj.productList ? obj.productList = obj.productList : obj.productList = [];
     containerGroupList.push(obj);
     this.setState({ containerGroupList });
     this.updateContainerGroupFormState('clearForm');
@@ -51,22 +60,30 @@ class App extends Component {
     let containerGroupList = this.state.containerGroupList.filter( (e, i) => e.id !== id );
     this.setState({ containerGroupList });
   }
-  updateContainerGroupFormState(propName, e) {
+  updateContainerGroupFormState(propName, productList, e) {
     //console.log(`e.target.value before: ${e.target.value}`);
+    let name = this.state.containerGroupFormState.name,
+      length = this.state.containerGroupFormState.length,
+      width = this.state.containerGroupFormState.width,
+      height = this.state.containerGroupFormState.height,
+      carrying = this.state.containerGroupFormState.carrying;
     switch(propName){
-      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length: this.state.containerGroupFormState.length, height: this.state.containerGroupFormState.height, width: this.state.containerGroupFormState.width, carrying: this.state.containerGroupFormState.carrying}}); break;
-      case 'length': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: e.target.value, height: this.state.containerGroupFormState.height, width: this.state.containerGroupFormState.width, carrying: this.state.containerGroupFormState.carrying}}); break;
-      case 'height': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: this.state.containerGroupFormState.length, height: e.target.value, width: this.state.containerGroupFormState.width, carrying: this.state.containerGroupFormState.carrying}}); break;
-      case 'width': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: this.state.containerGroupFormState.length, height: this.state.containerGroupFormState.height, width: e.target.value, carrying: this.state.containerGroupFormState.carrying}}); break;
-      case 'carrying': this.setState({containerGroupFormState: {name: this.state.containerGroupFormState.name, length: this.state.containerGroupFormState.length, height: this.state.containerGroupFormState.height, width: this.state.containerGroupFormState.width, carrying: e.target.value}}); break;
-      case 'clearForm': this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:''}}); break;
+      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length, height, width, carrying, productList}}); break;
+      case 'length': this.setState({containerGroupFormState: {name, length: e.target.value, height, width, carrying, productList}}); break;
+      case 'height': this.setState({containerGroupFormState: {name, length, height: e.target.value, width, carrying, productList}}); break;
+      case 'width': this.setState({containerGroupFormState: {name, length, height, width: e.target.value, carrying, productList}}); break;
+      case 'carrying': this.setState({containerGroupFormState: {name, length, height, width, carrying: e.target.value, productList}}); break;
+      case 'clearForm':
+        this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[]}});
+        console.log(`Attantion! The productList cleared in main state.`);
+        break;
       default: break;
     }
   }
-  editContainerGroup(id) {
+  editContainerGroup(id, productList) {
     this.addContainerGroupFormToggler(true);
     let containerGroupToEdit = this.state.containerGroupList.filter( (e, i) => e.id === id )[0];
-    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width} });
+    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width, carrying: containerGroupToEdit.carrying, productList: productList} });
     this.removeContainerGroup(id);
   }
   componentDidUpdate() {
@@ -77,7 +94,7 @@ class App extends Component {
       case true: this.setState({ addContainerFormOpened: is_it_should_be_opened }); break;
       case false:
         this.setState({ addContainerFormOpened: is_it_should_be_opened });
-        this.updateContainerGroupFormState('clearForm');// clear always when the form should be closed manually
+        this.updateContainerGroupFormState('clearForm');// Clear always when the form should be closed manually
         break;
       default: this.setState({ addContainerFormOpened: !this.state.addContainerFormOpened });
     }
@@ -88,9 +105,7 @@ class App extends Component {
     let containerGroupList = this.state.containerGroupList;
     // Refresh productList for this Container Group:
     containerGroupList.map((e, i) => {
-      if(e.id===obj.containerId){
-        e.productList = obj.productList;
-      }
+      if(e.id===obj.containerId){ e.productList = obj.productList; }
     });
     // Refresh containerGroupData for this state:
     this.setState({containerGroupList});
@@ -99,7 +114,7 @@ class App extends Component {
     return (
       <div className='container'>
         <h1>Cargo-React</h1>
-        <div className='text-center' style={{marginBottom:'20px'}}>
+        <div className='text-center' style={{marginBottom:'5px'}}>
           <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
         </div>
 

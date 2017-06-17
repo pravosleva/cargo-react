@@ -6,10 +6,6 @@ import Cargo from './Cargo';
 class ContainerGroupList extends Component {
   constructor(props){
     super(props);
-
-  }
-  updateProductListForContainerGroup() {
-
   }
   render() {
     let thead = <tr><th></th><th>Name</th><th>Length, mm</th><th>Width, mm</th><th>Height, mm</th><th>Carrying, kg</th><th>Cargo</th></tr>,
@@ -17,8 +13,8 @@ class ContainerGroupList extends Component {
           function(e, i){ return <tr key={i}>
             <td>
               <div className='btn-group' role='group'>
-                {/*<Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id)} />*/}
-                <Button iclassName='fa fa-close' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
+                <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id, e.productList)} />
+                <Button iclassName='fa fa-close' bsBtnClassName='btn-danger' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
               </div>
             </td>
             <td>{e.name}</td>
