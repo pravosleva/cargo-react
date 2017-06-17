@@ -10,26 +10,35 @@ _Under construction yet..._
 
 ## Tasklist
 
-- [x] *Container Group parameters*
-- [x] *Product parameters are required*
+- [x] **Container Group parameters**
+- [x] **Product parameters are required**
 (Length x Width x Height, Weight)
 - [x] Need to keep the productlist for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js)
-- [ ] *GET request for results from Back-end*
+- [ ] **GET request for results from Back-end**
 Waggons number calculation for each Container Group
-Request for example:
+The containerGroupList can be sent as:
 ```
 [
   {
-    name: str, carrying: num,
-    length: num, width: num, height: num,
+    name: str,
+    carrying: num,
+    length: num,
+    width: num,
+    height: num,
     productList: [
-      { name: str, length: num, width: num, height: num, weight: num }
+      {
+        name: str,
+        length: num,
+        width: num,
+        height: num,
+        weight: num
+      }
     ]
   }
 ]
 ```
-- [ ] Save output data to localStorage
-- [ ] Render 3D model in new window & Link to 3D model for other users
+- [ ] **Save input & output data to localStorage**
+- [ ] **Render 3D model in new window & Link to 3D model for other users**
 
 _Under construction yet..._
 
