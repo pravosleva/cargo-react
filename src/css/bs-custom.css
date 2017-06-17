@@ -1,0 +1,9 @@
+.panel {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-default {
+    color: #666;
+    background-color: #fff;
+    border-color: #ccc;
+}

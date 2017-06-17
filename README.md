@@ -12,11 +12,11 @@ _Under construction yet..._
 
 - [x] Container Group parameters
 - [ ] Product parameters (Length x Width x Height, Weight)
-- [ ] Need to keep productlist for each Container Group in the App state (see method `_updateProductListForContainerGroup(obj)` in App.js)
-- [ ] Send results to Back-end
-- [ ] Back-end: Wagon numbers for each Container Group calculation
-- [ ] Render 3D model in mew window
-- [ ] Link to 3D model for other users
+- [x] Need to keep the productlist for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js)
+- [ ] Back-end: Waggons number calculation for each Container Group
+- [ ] GET request for results from Back-end
+- [ ] Save output data to localStorage
+- [ ] Render 3D model in new window & Link to 3D model for other users
 
 _Under construction yet..._
 

@@ -22,7 +22,7 @@ class AddContainerGroupForm extends Component {
           <div className='panel-heading'>AddContainerGroupForm</div>
 
           <div className='panel-body'>
-            <div className='row' style={{paddingLeft:'30px', paddingRight:'30px'}}>
+            <div className='row' style={{paddingLeft:'30px',paddingRight:'30px'}}>
               <div className='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
                 <label>Name</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'name')} value={this.props.containerGroupFormState.name}></input>
@@ -37,8 +37,9 @@ class AddContainerGroupForm extends Component {
                 <label>Height, mm</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'height')} value={this.props.containerGroupFormState.height}></input>
               </div>
-              <p>Enter parameters for each Container of this containerGroup.</p>
             </div>
+            <hr />
+            <p>Enter parameters for each Container of this containerGroup.</p>
           </div>
 
           <div className='panel-footer'>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/App.css';
+//import '../css/App.css';
 import Button from './Button';
 import AddContainerGroupForm from './AddContainerGroupForm';
 import ContainerGroupList from './ContainerGroupList';
@@ -41,6 +41,7 @@ class App extends Component {
 
     let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
+    obj.productList = [];
     containerGroupList.push(obj);
     this.setState({ containerGroupList });
     this.updateContainerGroupFormState('clearForm');
@@ -83,10 +84,16 @@ class App extends Component {
   }
   _updateProductListForContainerGroup(obj) {
     // obj = {productList, containerId}
-    // Need to save the productList for Container Group to this state...
-
-    console.log(obj);
-    
+    // Task: Need to save the productList for the Container Group to this state.
+    let containerGroupList = this.state.containerGroupList;
+    // Refresh productList for this Container Group:
+    containerGroupList.map((e, i) => {
+      if(e.id===obj.containerId){
+        e.productList = obj.productList;
+      }
+    });
+    // Refresh containerGroupData for this state:
+    this.setState({containerGroupList});
   }
   render() {
     return (
