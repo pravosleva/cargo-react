@@ -17,7 +17,7 @@ class ContainerGroupList extends Component {
           function(e, i){ return <tr key={i}>
             <td>
               <div className='btn-group' role='group'>
-                <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id)} />
+                {/*<Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id)} />*/}
                 <Button iclassName='fa fa-close' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
               </div>
             </td>
@@ -27,12 +27,16 @@ class ContainerGroupList extends Component {
             <td>{e.height}</td>
             <td>{e.carrying}</td>
             <td>
-              <Cargo containerId={e.id} updateProductListForContainerGroup={this.props.updateProductListForContainerGroup} />
+              <Cargo
+                key={e.id}
+                containerId={e.id}
+                updateProductListForContainerGroup={this.props.updateProductListForContainerGroup}
+                productList={e.productList} />
             </td>
           </tr>
         },
         this
-      );
+      ).reverse();
     if(this.props.containerGroupList.length!==0){
       return (
         <div>

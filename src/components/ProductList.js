@@ -21,7 +21,7 @@ class ProductList extends Component {
           </tr>
         },
         this
-      );
+      ).reverse();
     if(this.props.productList.length!==0){
       return (
         <div>

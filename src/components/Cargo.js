@@ -8,9 +8,8 @@ class Cargo extends Component {
   constructor(props){
     super(props);
     this.state = {
-      addProductFormOpened: true,
-      productFormState: {name: ''},
-      productList: []
+      addProductFormOpened: false,
+      productFormState: {name: ''}
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
     this.saveProduct = this.saveProduct.bind(this);
@@ -31,7 +30,7 @@ class Cargo extends Component {
       return newUUID;
     };
 
-    let productList = this.state.productList;
+    let productList = this.props.productList;
     obj.id = _getUUID();
     productList.push(obj);
     this.setState({ productList });
@@ -41,7 +40,7 @@ class Cargo extends Component {
     this._updateProductListForContainerGroup(productList);
   }
   removeProduct(id) {
-    let productList = this.state.productList.filter( (e, i) => e.id !== id );
+    let productList = this.props.productList.filter( (e, i) => e.id !== id );
     this.setState({ productList });
 
     this._updateProductListForContainerGroup(productList);
@@ -55,7 +54,7 @@ class Cargo extends Component {
   }
   editProduct(id) {
     this.addProductFormToggler(true);
-    let productToEdit = this.state.productList.filter( (e, i) => e.id === id )[0];
+    let productToEdit = this.props.productList.filter( (e, i) => e.id === id )[0];
     this.setState({ productFormState: {name: productToEdit.name} });
     this.removeProduct(id);
   }
@@ -86,7 +85,7 @@ class Cargo extends Component {
           updateProductFormState={this.updateProductFormState}
           saveProduct={this.saveProduct} />
         <ProductList
-          productList={this.state.productList} removeProduct={this.removeProduct} editProduct={this.editProduct} />
+          productList={this.props.productList} removeProduct={this.removeProduct} editProduct={this.editProduct} />
 
       </div>
     );
