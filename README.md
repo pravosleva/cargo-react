@@ -35,7 +35,8 @@ The containerGroupList can be sent as:
         height: num,
         weight: num
       }
-    ]
+    ],
+    comment: str
   }
 ]
 ```

@@ -10,7 +10,7 @@ import ContainerGroupList from './ContainerGroupList';
 * - App
     state = {
       addContainerFormOpened: bool,
-      containerGroupFormState: {name: str, length: num, width: num, height: num, carrying: num, productList: arr},
+      containerGroupFormState: {name: str, length: num, width: num, height: num, carrying: num, productList: arr, comment: str},
       containerGroupList: arr
     }
 *   |   |-- AddContainerGroupForm
@@ -29,7 +29,7 @@ class App extends Component {
     super(props);
     this.state = {
       addContainerFormOpened: props.defaultAddContainerGroupFormOpened,
-      containerGroupFormState: {name: '', length: '', width: '', height: '', carrying: '', productList:[]},
+      containerGroupFormState: {name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: ''},
       containerGroupList: []
     }
     this.updateContainerGroupFormState = this.updateContainerGroupFormState.bind(this);
@@ -66,15 +66,17 @@ class App extends Component {
       length = this.state.containerGroupFormState.length,
       width = this.state.containerGroupFormState.width,
       height = this.state.containerGroupFormState.height,
-      carrying = this.state.containerGroupFormState.carrying;
+      carrying = this.state.containerGroupFormState.carrying,
+      comment = this.state.containerGroupFormState.comment;
     switch(propName){
-      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length, height, width, carrying, productList}}); break;
-      case 'length': this.setState({containerGroupFormState: {name, length: e.target.value, height, width, carrying, productList}}); break;
-      case 'height': this.setState({containerGroupFormState: {name, length, height: e.target.value, width, carrying, productList}}); break;
-      case 'width': this.setState({containerGroupFormState: {name, length, height, width: e.target.value, carrying, productList}}); break;
-      case 'carrying': this.setState({containerGroupFormState: {name, length, height, width, carrying: e.target.value, productList}}); break;
+      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length, height, width, carrying, productList, comment}}); break;
+      case 'length': this.setState({containerGroupFormState: {name, length: e.target.value, height, width, carrying, productList, comment}}); break;
+      case 'height': this.setState({containerGroupFormState: {name, length, height: e.target.value, width, carrying, productList, comment}}); break;
+      case 'width': this.setState({containerGroupFormState: {name, length, height, width: e.target.value, carrying, productList, comment}}); break;
+      case 'carrying': this.setState({containerGroupFormState: {name, length, height, width, carrying: e.target.value, productList, comment}}); break;
+      case 'comment': this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment: e.target.value}}); break;
       case 'clearForm':
-        this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[]}});
+        this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[], comment:''}});
         console.log(`Attantion! The productList cleared in main state.`);
         break;
       default: break;
@@ -83,7 +85,7 @@ class App extends Component {
   editContainerGroup(id, productList) {
     this.addContainerGroupFormToggler(true);
     let containerGroupToEdit = this.state.containerGroupList.filter( (e, i) => e.id === id )[0];
-    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width, carrying: containerGroupToEdit.carrying, productList: productList} });
+    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width, carrying: containerGroupToEdit.carrying, productList: productList, comment: containerGroupToEdit.comment} });
     this.removeContainerGroup(id);
   }
   componentDidUpdate() {
