@@ -23,14 +23,14 @@ class AddContainerGroupForm extends Component {
           <div className='panel-heading'>AddContainerGroupForm</div>
 
           <div className='panel-body'>
-            <div className='row' style={{paddingLeft:'30px',paddingRight:'30px'}}>
-              <div className='col-lg-3 col-md-4 col-sm-6 col-xs-12'>
+            <div className='row'>
+              <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
                 <label>Name</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'name', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.name}></input>
                 <label>Carrying, kg</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.carrying}></input>
               </div>
-              <div className='col-lg-3 col-md-4 col-sm-6 col-xs-12'>
+              <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
                 <label>Length, mm</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'length', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.length}></input>
                 <label>Width, mm</label>
@@ -38,7 +38,7 @@ class AddContainerGroupForm extends Component {
                 <label>Height, mm</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'height', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.height}></input>
               </div>
-              <div className='col-lg-6 col-md-4 col-sm-6 col-xs-12'>
+              <div className='col-lg-6 col-md-4 col-sm-4 col-xs-12'>
                 <label>Comment</label>
                 <textarea className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'comment', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.comment}></textarea>
               </div>

@@ -8,8 +8,8 @@ class Cargo extends Component {
   constructor(props){
     super(props);
     this.state = {
-      addProductFormOpened: false,
-      productFormState: {name: '', length: '', width: '', height: '', weight: ''}
+      addProductFormOpened: true,
+      productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: ''}
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
     this.saveProduct = this.saveProduct.bind(this);
@@ -45,20 +45,27 @@ class Cargo extends Component {
     this._updateProductListForContainerGroup(productList);
   }
   updateProductFormState(propName, e) {
+    let name = this.state.productFormState.name,
+      length = this.state.productFormState.length,
+      width = this.state.productFormState.width,
+      height = this.state.productFormState.height,
+      weight = this.state.productFormState.weight,
+      comment = this.state.productFormState.comment;
     switch(propName){
-      case 'name': this.setState({productFormState: {name: e.target.value, length: this.state.productFormState.length, width: this.state.productFormState.width, height: this.state.productFormState.height, weight: this.state.productFormState.weight}}); break;
-      case 'length': this.setState({productFormState: {name: this.state.productFormState.name, length: e.target.value, width: this.state.productFormState.width, height: this.state.productFormState.height, weight: this.state.productFormState.weight}}); break;
-      case 'width': this.setState({productFormState: {name: this.state.productFormState.name, length: this.state.productFormState.length, width: e.target.value, height: this.state.productFormState.height, weight: this.state.productFormState.weight}}); break;
-      case 'height': this.setState({productFormState: {name: this.state.productFormState.name, length: this.state.productFormState.length, width: this.state.productFormState.width, height: e.target.value, weight: this.state.productFormState.weight}}); break;
-      case 'weight': this.setState({productFormState: {name: this.state.productFormState.name, length: this.state.productFormState.length, width: this.state.productFormState.width, height: this.state.productFormState.height, weight: e.target.value}}); break;
-      case 'clearForm': this.setState({productFormState: {name: '', length: '', width: '', height: '', weight: ''}}); break;
+      case 'name': this.setState({productFormState: {name: e.target.value, length, width, height, weight, comment}}); break;
+      case 'length': this.setState({productFormState: {name, length: e.target.value, width, height, weight, comment}}); break;
+      case 'width': this.setState({productFormState: {name, length, width: e.target.value, height, weight, comment}}); break;
+      case 'height': this.setState({productFormState: {name, length, width, height: e.target.value, weight, comment}}); break;
+      case 'weight': this.setState({productFormState: {name, length, width, height, weight: e.target.value, comment}}); break;
+      case 'comment': this.setState({productFormState: {name, length, width, height, weight, comment: e.target.value}}); break;
+      case 'clearForm': this.setState({productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: ''}}); break;
       default: break;
     }
   }
   editProduct(id) {
     this.addProductFormToggler(true);
     let productToEdit = this.props.productList.filter( (e, i) => e.id === id )[0];
-    this.setState({ productFormState: {name: productToEdit.name, length: productToEdit.length, width: productToEdit.width, height: productToEdit.height, weight: productToEdit.weight} });
+    this.setState({ productFormState: {name: productToEdit.name, length: productToEdit.length, width: productToEdit.width, height: productToEdit.height, weight: productToEdit.weight, comment: productToEdit.comment} });
     this.removeProduct(id);
   }
   addProductFormToggler(is_it_should_be_opened) {
@@ -74,10 +81,11 @@ class Cargo extends Component {
   render() {
     return (
       <div>
-        {/*<h3>Cargo</h3>*/}
+
+        <strong>Cargo</strong><br />
         <span>Product list for the Container group.</span>
 
-        <div className='text-right' style={{marginBottom:'5px'}}>
+        <div className='text-center' style={{marginBottom:'5px'}}>
           <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
         </div>
 

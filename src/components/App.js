@@ -77,7 +77,7 @@ class App extends Component {
       case 'comment': this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment: e.target.value}}); break;
       case 'clearForm':
         this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[], comment:''}});
-        console.log(`Attantion! The productList cleared in main state.`);
+        //console.log(`Attantion! The productList cleared in main state.`);
         break;
       default: break;
     }

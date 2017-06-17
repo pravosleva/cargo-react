@@ -8,28 +8,27 @@ class ContainerGroupList extends Component {
     super(props);
   }
   render() {
-    let thead = <tr><th></th><th>Name</th><th>Length, mm</th><th>Width, mm</th><th>Height, mm</th><th>Carrying, kg</th><th>Cargo</th></tr>,
-      tbody = this.props.containerGroupList.map(
-          function(e, i){ return <tr key={i}>
-            <td>
-              <div className='btn-group' role='group'>
+    let alerts = this.props.containerGroupList.map(
+          function(e, i){ return <div className='well' key={i}>
+            <div style={{position:'relative'}}>
+              <div className='btn-group' role='group' style={{position:'absolute', top:'5px', right:'5px'}}>
                 <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id, e.productList)} />
                 <Button iclassName='fa fa-close' bsBtnClassName='btn-danger' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
               </div>
-            </td>
-            <td>{e.name}</td>
-            <td>{e.length}</td>
-            <td>{e.width}</td>
-            <td>{e.height}</td>
-            <td>{e.carrying}</td>
-            <td>
-              <Cargo
-                key={e.id}
-                containerId={e.id}
-                updateProductListForContainerGroup={this.props.updateProductListForContainerGroup}
-                productList={e.productList} />
-            </td>
-          </tr>
+            </div>
+
+            <strong>Name: {e.name===``?`_`:e.name}</strong><br />
+            Dimentions: {e.length===``?`_`:e.length} x {e.width===``?`_`:e.width} x {e.height===``?`_`:e.height} mm<br />
+            Carrying: {e.carrying===``?`_`:e.carrying} kg<br />
+            {e.comment?<span className='text-muted'>Comment: {e.comment}</span>:null}
+
+            <hr />
+            <Cargo
+              key={e.id}
+              containerId={e.id}
+              updateProductListForContainerGroup={this.props.updateProductListForContainerGroup}
+              productList={e.productList} />
+          </div>
         },
         this
       ).reverse();
@@ -37,10 +36,7 @@ class ContainerGroupList extends Component {
       return (
         <div>
           <h2>ContainerGroupList</h2>
-          <table className="table table-condensed">
-            <thead>{thead}</thead>
-            <tbody>{tbody}</tbody>
-          </table>
+          {alerts}
         </div>
       );
     }else{return null}

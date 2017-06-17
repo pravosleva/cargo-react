@@ -16,16 +16,19 @@ class ProductList extends Component {
               </div>
             </span>
             <br />
-            <strong>{e.name}</strong>
+            <strong>Name: {e.name===``?`_`:e.name}</strong>
             <br />
-            <span>Dimentions: {e.length} x {e.width} x {e.height} mm ({e.weight} kg)</span>
+            <span>Dimentions: {e.length===``?`_`:e.length} x {e.width===``?`_`:e.width} x {e.height===``?`_`:e.height} mm ({e.weight===``?`_`:e.weight} kg)</span>
           </li>
         },
         this
       ).reverse();
     if(this.props.productList.length!==0){
       return (
-        <ul>{lies}</ul>
+        <div>
+          <strong>ProductList</strong><br />
+          <ul>{lies}</ul>
+        </div>
       );
     }else{return null}
   }
