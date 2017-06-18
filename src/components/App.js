@@ -5,20 +5,23 @@ import AddContainerGroupForm from './AddContainerGroupForm';
 import ContainerGroupList from './ContainerGroupList';
 
 // The snackbar and test for him:
+import { show, ACTION_TYPE } from 'js-snackbar';
 // Require css for your app's bundle process
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
-import { show, ACTION_TYPE } from 'js-snackbar';
 show({
   text: 'Last update at 2017-06-18',
   pos: 'top-right',
   customClass: 'snackbar-default',
   duration: 35000,
-  actionText: 'Dismiss',// For ACTION_TYPE.TEXT
-  actionType: ACTION_TYPE.NONE,
+  actionText: 'Send FeedBack&nbsp;&nbsp;&#9993;',// For ACTION_TYPE.TEXT
+  actionType: ACTION_TYPE.TEXT,
   onSnackbarClick: () => { console.log('hello world by snackbar'); },
   onActionClick: (element) => {
     console.log('hello world by snackbar action');
+
+    let x = window.open(`mailto:selection4test@gmail.com?subject=About%20Cargo`);
+    x.close();
     element.style.opacity = 0;
   }
 });
@@ -136,7 +139,7 @@ class App extends Component {
     });
     // Refresh containerGroupData for this state:
     this.setState({containerGroupList});
-    show({ text: `Productlist for Container Group has updated`, pos: 'top-right', customClass: 'snackbar-primary', duration: 2000 });
+    show({ text: `Productlist for Container Group has updated...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 2000 });
   }
   render() {
     return (

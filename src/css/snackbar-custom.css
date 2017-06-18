@@ -10,9 +10,11 @@
 }
 @media (max-width:640px) {
   .snackbar-container{
+    text-align: center;
     left: 0;
     right: 0
   }
+  .snackbar-container .action { margin: 0 10px 0 10px; }
 }
 
 .snackbar-default {
