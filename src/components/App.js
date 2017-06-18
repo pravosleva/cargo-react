@@ -4,6 +4,13 @@ import Button from './Button';
 import AddContainerGroupForm from './AddContainerGroupForm';
 import ContainerGroupList from './ContainerGroupList';
 
+// require css for your app's bundle process
+import '../../node_modules/js-snackbar/dist/snackbar.css';
+import '../css/snackbar-custom.css';
+// import the show function
+import { show } from 'js-snackbar';
+show({ text: 'Last update at 2017-06-18', pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
+
 /*
 *                             COMPONENT STRUCTURE
 *
@@ -48,13 +55,19 @@ class App extends Component {
       return newUUID;
     };
 
+    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.carrying===``){
+      show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
+      return;
+    }
+
     let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
     obj.productList ? obj.productList = obj.productList : obj.productList = [];
     containerGroupList.push(obj);
     this.setState({ containerGroupList });
     this.updateContainerGroupFormState('clearForm');
-    this.addContainerGroupFormToggler(false)
+    this.addContainerGroupFormToggler(false);
+    show({ text: `It's Ok. Container Group saved as ${obj.name}...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
   }
   removeContainerGroup(id) {
     let containerGroupList = this.state.containerGroupList.filter( (e, i) => e.id !== id );
@@ -111,6 +124,7 @@ class App extends Component {
     });
     // Refresh containerGroupData for this state:
     this.setState({containerGroupList});
+    show({ text: `Productlist for Container Group has updated`, pos: 'top-right', customClass: 'snackbar-primary', duration: 2000 });
   }
   render() {
     return (

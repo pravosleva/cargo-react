@@ -4,11 +4,17 @@ import Button from './Button';
 import AddProductForm from './AddProductForm';
 import ProductList from './ProductList';
 
+// require css for your app's bundle process
+import '../../node_modules/js-snackbar/dist/snackbar.css';
+import '../css/snackbar-custom.css';
+// import the show function
+import { show } from 'js-snackbar';
+
 class Cargo extends Component {
   constructor(props){
     super(props);
     this.state = {
-      addProductFormOpened: true,
+      addProductFormOpened: false,
       productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: ''}
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
@@ -30,6 +36,11 @@ class Cargo extends Component {
       return newUUID;
     };
 
+    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.weight===``){
+      show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
+      return;
+    }
+
     let productList = this.props.productList;
     obj.id = _getUUID();
     productList.push(obj);
@@ -37,6 +48,7 @@ class Cargo extends Component {
     this.addProductFormToggler(false);
 
     this._updateProductListForContainerGroup(productList);
+
   }
   removeProduct(id) {
     let productList = this.props.productList.filter( (e, i) => e.id !== id );

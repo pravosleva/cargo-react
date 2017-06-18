@@ -1,0 +1,8 @@
+.snackbar-primary {
+  background-color: #337ab7 !important;
+  border-radius: 4px;
+}
+.snackbar-danger {
+  background-color: #d9534f !important;
+  border-radius: 4px;
+}
