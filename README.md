@@ -2,19 +2,20 @@
 
 ## Terminology
 
-- Container Group - Group of Containers one and the same type (dimentions and carrying). It is Motorcade of the Waggons (Containers).
-- Product - one unit of equipment to transport in this Container Group.
-- Cargo - productlist for the Container Group
+- Container Group (should be formed by user) - is the Group of Containers one and the same particular type (dimentions and carrying that should be entered by user) and one and the same particular hiring price (that should be entered by user). In other words it is the motorcade of the Waggons (Containers).
+- Product - is the one item of equipmentlist to transport (productlist) in this Container Group.
+- Cargo - is the equipmentlist (productlist) for the particular Container Group.
+- Hiring Price (input parameter) - is the Hiring Price for each unit of the particular Container Group.
+- Delivery Price (output parameter) - is the Delivery Price for each product (unit) of equipmentlist (productlist) for the particular Container Group.
 
 _Under construction yet..._
 
-## Tasklist
+## Tasklist (2 of 8 are completed)
 
-- [x] **Container Group parameters.**
-- [x] **Product parameters are required.**
-(Length x Width x Height, Weight)
-- [x] Need to keep the `productlist` for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js).
-- [ ] **Hiring price should be as input rapameter for Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productlist` for the Container Group.
+- [ ] **Container Group parameters** (length x width x height, carrying, _hiringPrice_)
+- [x] **Product parameters are required (length x width x height, weight).**
+- [x] Need to keep the `productList` for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js).
+- [ ] **Hiring Price should be as input parameter for the particular Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productlist` for the Container Group.
 - [ ] **POST request to Back-end for results.**
 Waggons number calculation for each Container Group.
 The `containerGroupList` can be sent as:
@@ -27,7 +28,7 @@ The `containerGroupList` can be sent as:
     length: num,
     width: num,
     height: num,
-    hiringPrice: num, // Not realized yet...
+    hiringPrice: num,// Not realized yet...
     productList: [
       {
         id: str,
@@ -43,6 +44,7 @@ The `containerGroupList` can be sent as:
   }
 ]
 ```
+- [ ] **Back-end side that will take this request.**
 Result can be returned as:
 ```
 [
@@ -52,7 +54,7 @@ Result can be returned as:
     productList: [
       {
         id: str,
-        deliveryPrice: num // Not realized yet...
+        deliveryPrice: num// Not realized yet...
       }
     ]
   }
