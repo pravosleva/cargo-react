@@ -14,7 +14,7 @@ _Under construction yet..._
 - [x] **Product parameters are required.**
 (Length x Width x Height, Weight)
 - [x] Need to keep the productlist for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js).
-- [ ] **GET request for results from Back-end.**
+- [ ] **POST request to Back-end for results.**
 Waggons number calculation for each Container Group.
 The containerGroupList can be sent as:
 ```
@@ -41,10 +41,23 @@ The containerGroupList can be sent as:
   }
 ]
 ```
+Result can be returned as:
+```
+[
+  {
+    id: str,
+    waggonsNumber: num
+  }
+]
+```
 - [ ] **Save input & output data to localStorage.**
 - [ ] **Render 3D model in new window & Link to 3D model for other users.**
 
 _Under construction yet..._
+
+## Demo
+
+[Link](http://selection4test.ru/projects/cargo-react/index.html)
 
 # Original ReadMe
 
