@@ -4,12 +4,24 @@ import Button from './Button';
 import AddContainerGroupForm from './AddContainerGroupForm';
 import ContainerGroupList from './ContainerGroupList';
 
-// require css for your app's bundle process
+// The snackbar and test for him:
+// Require css for your app's bundle process
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
-// import the show function
-import { show } from 'js-snackbar';
-show({ text: 'Last update at 2017-06-18', pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
+import { show, ACTION_TYPE } from 'js-snackbar';
+show({
+  text: 'Last update at 2017-06-18',
+  pos: 'top-right',
+  customClass: 'snackbar-default',
+  duration: 35000,
+  actionText: 'Dismiss',// For ACTION_TYPE.TEXT
+  actionType: ACTION_TYPE.NONE,
+  onSnackbarClick: () => { console.log('hello world by snackbar'); },
+  onActionClick: (element) => {
+    console.log('hello world by snackbar action');
+    element.style.opacity = 0;
+  }
+});
 
 /*
 *                             COMPONENT STRUCTURE

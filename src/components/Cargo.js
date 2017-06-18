@@ -39,16 +39,19 @@ class Cargo extends Component {
     if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.weight===``){
       show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
+    }else{
+      let productList = this.props.productList;
+      obj.id = _getUUID();
+
+      //obj.length = _getNumericValue(obj.length);
+      //..
+
+      productList.push(obj);
+      this.updateProductFormState('clearForm');
+      this.addProductFormToggler(false);
+
+      this._updateProductListForContainerGroup(productList);
     }
-
-    let productList = this.props.productList;
-    obj.id = _getUUID();
-    productList.push(obj);
-    this.updateProductFormState('clearForm');
-    this.addProductFormToggler(false);
-
-    this._updateProductListForContainerGroup(productList);
-
   }
   removeProduct(id) {
     let productList = this.props.productList.filter( (e, i) => e.id !== id );
@@ -63,12 +66,29 @@ class Cargo extends Component {
       height = this.state.productFormState.height,
       weight = this.state.productFormState.weight,
       comment = this.state.productFormState.comment;
+    let _getNumericValue = (val) => { return (val!=="" && !isNaN(val)) ? Number(val) : "" };
     switch(propName){
       case 'name': this.setState({productFormState: {name: e.target.value, length, width, height, weight, comment}}); break;
-      case 'length': this.setState({productFormState: {name, length: e.target.value, width, height, weight, comment}}); break;
-      case 'width': this.setState({productFormState: {name, length, width: e.target.value, height, weight, comment}}); break;
-      case 'height': this.setState({productFormState: {name, length, width, height: e.target.value, weight, comment}}); break;
-      case 'weight': this.setState({productFormState: {name, length, width, height, weight: e.target.value, comment}}); break;
+      case 'length':
+        if(!isNaN(e.target.value)){
+          this.setState({productFormState: {name, length: _getNumericValue(e.target.value), width, height, weight, comment}});
+        }else{};
+        break;
+      case 'width':
+        if(!isNaN(e.target.value)){
+          this.setState({productFormState: {name, length, width: _getNumericValue(e.target.value), height, weight, comment}});
+        }else{};
+        break;
+      case 'height':
+        if(!isNaN(e.target.value)){
+          this.setState({productFormState: {name, length, width, height: _getNumericValue(e.target.value), weight, comment}});
+        }else{};
+        break;
+      case 'weight':
+        if(!isNaN(e.target.value)){
+          this.setState({productFormState: {name, length, width, height, weight: _getNumericValue(e.target.value), comment}});
+        }else{};
+        break;
       case 'comment': this.setState({productFormState: {name, length, width, height, weight, comment: e.target.value}}); break;
       case 'clearForm': this.setState({productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: ''}}); break;
       default: break;

@@ -1,8 +1,26 @@
+@media (min-width:640px) {
+  .snackbar-container {
+    min-width: 288px;
+    max-width: 568px;
+    display: inline-flex;
+    border-radius: 4px;
+    margin: 24px;
+    bottom: -100px;
+  }
+}
+@media (max-width:640px) {
+  .snackbar-container{
+    left: 0;
+    right: 0
+  }
+}
+
+.snackbar-default {
+  background-color: lightgray !important;
+}
 .snackbar-primary {
   background-color: #337ab7 !important;
-  border-radius: 4px;
 }
 .snackbar-danger {
   background-color: #d9534f !important;
-  border-radius: 4px;
 }

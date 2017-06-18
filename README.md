@@ -13,10 +13,11 @@ _Under construction yet..._
 - [x] **Container Group parameters.**
 - [x] **Product parameters are required.**
 (Length x Width x Height, Weight)
-- [x] Need to keep the productlist for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js).
+- [x] Need to keep the `productlist` for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js).
+- [ ] **Hiring price should be as input rapameter for Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productlist` for the Container Group.
 - [ ] **POST request to Back-end for results.**
 Waggons number calculation for each Container Group.
-The containerGroupList can be sent as:
+The `containerGroupList` can be sent as:
 ```
 [
   {
@@ -26,6 +27,7 @@ The containerGroupList can be sent as:
     length: num,
     width: num,
     height: num,
+    hiringPrice: num, // Not realized yet...
     productList: [
       {
         id: str,
@@ -46,7 +48,13 @@ Result can be returned as:
 [
   {
     id: str,
-    waggonsNumber: num
+    waggonsNumber: num,
+    productList: [
+      {
+        id: str,
+        deliveryPrice: num // Not realized yet...
+      }
+    ]
   }
 ]
 ```

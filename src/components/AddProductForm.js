@@ -29,13 +29,13 @@ class AddProductForm extends Component {
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
             </div>
             <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
-              <label>Length</label>
+              <label>Length, mm</label>
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'length')} value={this.props.productFormState.length}></input>
-              <label>Width</label>
+              <label>Width, mm</label>
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'width')} value={this.props.productFormState.width}></input>
-              <label>Height</label>
+              <label>Height, mm</label>
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'height')} value={this.props.productFormState.height}></input>
-              <label>Weight</label>
+              <label>Weight, kg</label>
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'weight')} value={this.props.productFormState.weight}></input>
             </div>
             <div className='col-lg-6 col-md-4 col-sm-4 col-xs-12'>
