@@ -96,13 +96,34 @@ class App extends Component {
       height = this.state.containerGroupFormState.height,
       carrying = this.state.containerGroupFormState.carrying,
       comment = this.state.containerGroupFormState.comment;
+    let _getNumericValue = (val) => {
+      return (val!=="" && !isNaN(val)) ? Number(val) : "";
+    };
     switch(propName){
       case 'name': this.setState({containerGroupFormState: {name: e.target.value, length, height, width, carrying, productList, comment}}); break;
-      case 'length': this.setState({containerGroupFormState: {name, length: e.target.value, height, width, carrying, productList, comment}}); break;
-      case 'height': this.setState({containerGroupFormState: {name, length, height: e.target.value, width, carrying, productList, comment}}); break;
-      case 'width': this.setState({containerGroupFormState: {name, length, height, width: e.target.value, carrying, productList, comment}}); break;
-      case 'carrying': this.setState({containerGroupFormState: {name, length, height, width, carrying: e.target.value, productList, comment}}); break;
-      case 'comment': this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment: e.target.value}}); break;
+      case 'length':
+        if(!isNaN(e.target.value)){
+          this.setState({containerGroupFormState: {name, length: _getNumericValue(e.target.value), height, width, carrying, productList, comment}}); break;
+        }else{};
+        break;
+      case 'height':
+        if(!isNaN(e.target.value)){
+          this.setState({containerGroupFormState: {name, length, height: _getNumericValue(e.target.value), width, carrying, productList, comment}}); break;
+        }else{};
+        break;
+      case 'width':
+        if(!isNaN(e.target.value)){
+          this.setState({containerGroupFormState: {name, length, height, width: _getNumericValue(e.target.value), carrying, productList, comment}}); break;
+        }else{};
+        break;
+      case 'carrying':
+        if(!isNaN(e.target.value)){
+          this.setState({containerGroupFormState: {name, length, height, width, carrying: _getNumericValue(e.target.value), productList, comment}}); break;
+        }else{};
+        break;
+      case 'comment':
+        this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment: e.target.value}});
+        break;
       case 'clearForm':
         this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[], comment:''}});
         //console.log(`Attantion! The productList cleared in main state.`);
