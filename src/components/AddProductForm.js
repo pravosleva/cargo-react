@@ -43,7 +43,11 @@ class AddProductForm extends Component {
               <textarea className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'comment')} value={this.props.productFormState.comment}></textarea>
             </div>
           </div>
-      </div>
+          <hr />
+          <p className='text-muted'>
+            Attantion! Parameters of the Product can't be more than dimentions and carrying capacity of item of the Container Group.
+          </p>
+        </div>
         <div className='panel-footer'>
           <div className='text-right'>
             <div className='btn-group' role='group'>
@@ -52,6 +56,7 @@ class AddProductForm extends Component {
             </div>
           </div>
         </div>
+
       </div>
     );
   }

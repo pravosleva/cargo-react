@@ -10,7 +10,7 @@ import { show, ACTION_TYPE } from 'js-snackbar';
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
 show({
-  text: 'Last update at 2017-06-18',
+  text: 'Last update at 2017-06-19',
   pos: 'top-right',
   customClass: 'snackbar-default',
   duration: 35000,
