@@ -187,7 +187,7 @@ class App extends Component {
 }
 
 App.defaultProps={
-  defaultAddContainerGroupFormOpened: true,
+  defaultAddContainerGroupFormOpened: false,
 };
 
 export default App;

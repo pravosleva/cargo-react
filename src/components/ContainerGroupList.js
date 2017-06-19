@@ -27,7 +27,8 @@ class ContainerGroupList extends Component {
               key={e.id}
               containerId={e.id}
               updateProductListForContainerGroup={this.props.updateProductListForContainerGroup}
-              productList={e.productList} />
+              productList={e.productList}
+              containerGroupList={this.props.containerGroupList} />
           </div>
         },
         this

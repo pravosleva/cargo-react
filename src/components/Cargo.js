@@ -40,12 +40,20 @@ class Cargo extends Component {
       show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
     }else{
-      let productList = this.props.productList;
+      // Need to check that will the product fit in a container. If it is true then continue, else return.
+      // First of all we have to detect max dimentions of the Container and max weight that it can to accept.
+      let maxLength = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).length,
+        maxWidth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).width,
+        maxHeigth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).height,
+        maxWeigth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).carrying;
+      // Then we have to check the product parameters before add it to productList:
+      if(obj.length > maxLength){ show({ text: `Length is more than maxLength = ${maxLength} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
+      if(obj.width > maxWidth){ show({ text: `Width is more than maxWidth = ${maxWidth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
+      if(obj.height > maxHeigth){ show({ text: `Height is more than maxHeigth = ${maxHeigth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
+      if(obj.weight > maxWeigth){ show({ text: `Weight is more than maxWeigth = ${maxWeigth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
+      // If was not return that's Ok, we are continue:
       obj.id = _getUUID();
-
-      //obj.length = _getNumericValue(obj.length);
-      //..
-
+      let productList = this.props.productList;
       productList.push(obj);
       this.updateProductFormState('clearForm');
       this.addProductFormToggler(false);
