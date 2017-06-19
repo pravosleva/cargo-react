@@ -47,10 +47,18 @@ class Cargo extends Component {
         maxHeigth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).height,
         maxWeigth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).carrying;
       // Then we have to check the product parameters before add it to productList:
-      if(obj.length > maxLength){ show({ text: `Length is more than maxLength = ${maxLength} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
-      if(obj.width > maxWidth){ show({ text: `Width is more than maxWidth = ${maxWidth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
+      let conditional_length, conditional_width;
+      if(obj.length > obj.width){
+        conditional_length = obj.length;
+        conditional_width = obj.width;
+      }else{
+        conditional_length = obj.width;
+        conditional_width = obj.length;
+      }
+      if(conditional_length > maxLength){ show({ text: `The most dimention is more than maxLength = ${maxLength} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
+      if(conditional_width > maxWidth){ show({ text: `The smallest dimention is more than maxWidth = ${maxWidth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
       if(obj.height > maxHeigth){ show({ text: `Height is more than maxHeigth = ${maxHeigth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
-      if(obj.weight > maxWeigth){ show({ text: `Weight is more than maxWeigth = ${maxWeigth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
+      if(obj.weight > maxWeigth){ show({ text: `Weight is more than maxWeigth = ${maxWeigth} kg! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
       // If was not return that's Ok, we are continue:
       obj.id = _getUUID();
       let productList = this.props.productList;
@@ -121,7 +129,6 @@ class Cargo extends Component {
   render() {
     return (
       <div>
-
         <strong>Cargo</strong><br />
         <span>Product list for the Container group.</span>
 
@@ -139,7 +146,6 @@ class Cargo extends Component {
           productList={this.props.productList}
           removeProduct={this.removeProduct}
           editProduct={this.editProduct} />
-
       </div>
     );
   }
