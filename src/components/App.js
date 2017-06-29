@@ -10,7 +10,7 @@ import { show, ACTION_TYPE } from 'js-snackbar';
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
 show({
-  text: 'Last update at 2017-06-19',
+  text: 'Last update at 2017-06-29',
   pos: 'top-right',
   customClass: 'snackbar-default',
   duration: 35000,
@@ -33,7 +33,29 @@ show({
     state = {
       addContainerFormOpened: bool,
       containerGroupFormState: {name: str, length: num, width: num, height: num, carrying: num, productList: arr, comment: str},
-      containerGroupList: arr
+      containerGroupList: [
+        {
+          id: str,
+          name: str,
+          carrying: num,
+          length: num,
+          width: num,
+          height: num,
+          hiringPrice: num, // not used yet...
+          productList: [
+            {
+              id: str,
+              name: str,
+              length: num,
+              width: num,
+              height: num,
+              weight: num,
+              comment: str
+            }
+          ],
+          comment: str
+        }
+      ]
     }
 *   |   |-- AddContainerGroupForm
 *   |   |-- ContainerGroupList
@@ -74,6 +96,9 @@ class App extends Component {
       show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
     }
+
+    // Need to check the dimentions and weight for each product before save (refresh) parameters of the particular Container Group
+    //..
 
     let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
