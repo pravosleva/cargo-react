@@ -17,6 +17,7 @@ _Under construction yet..._
 - [ ] **Container Group parameters should be entered as required parameters** (length x width x height, carrying, _hiringPrice_, _currency_)
 - [x] **Product parameters should be entered as required parameters (length x width x height, weight).**
 - [x] Need to keep the `productList` for each Container Group in the main App state (see method `_updateProductListForContainerGroup (obj)` in `App` component).
+- [ ] **Need to check that can the product fit in a container.** See method `saveProduct (obj)` in `Cargo` component. Criteria for verification: maxLength, maxWidth, maxHeigth, maxWeight. Also we will should do it after update the Container Group parameters (in the same method).
 - [ ] **Hiring Price should be as input parameter for the particular Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productList` for the Container Group.
 - [ ] **POST request to Back-end for results.**
 Waggons number calculation for each Container Group.

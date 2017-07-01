@@ -174,6 +174,7 @@ class App extends Component {
         <div className='text-center' style={{marginBottom:'5px'}}>
           <div className='btn-group' role='group'>
             <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
+            <Button handlerClick={ this.test } iclassName='fa fa-question' tmp={'[ Test ]'} />
         </div>
       </div>
 
