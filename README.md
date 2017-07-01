@@ -1,21 +1,22 @@
-# Cargo calculation based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
+# Cargo transport from Counrty A oto Country B calculation based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
 
 ## Terminology
 
 - _Container Group_ (should be formed by user) - is the Group of Containers one and the same particular type (dimentions and carrying that should be entered by user) and one and the same particular hiring price (that should be entered by user). In other words it is the motorcade of the Waggons (Containers).
 - _Product_ - is the one item of equipmentlist to transport (productlist) in this Container Group.
 - _Cargo_ - is the equipmentlist (productlist) for the particular Container Group.
-- _Hiring Price_ (input parameter) - is the Hiring Price for each unit of the particular Container Group.
+- _Hiring Price & Currency_ (input parameter) - is the Hiring Price (in particular Currency) for each unit of the particular Container Group.
 - _Delivery Price_ (output parameter) - is the Delivery Price for each product (unit) of equipmentlist (productlist) for the particular Container Group.
+- _Country A_ - Point of departure.
+- _Country B_ - Destination.
 
 _Under construction yet..._
 
-## Tasklist (3 of 9 are completed)
+## Tasklist (2 of 9 are completed)
 
-- [ ] **Container Group parameters** (length x width x height, carrying, _hiringPrice_)
-- [x] **Product parameters are required (length x width x height, weight).**
-- [x] Need to keep the `productList` for each Container Group in the main App state (see method `_updateProductListForContainerGroup(obj)` in App.js).
-- [x] **Need to check that will the product fit in a container.** See method `saveProduct(obj)` in Cargo.js. Criteria for verification: maxLength, maxWidth, maxHeigth, maxWeight.
+- [ ] **Container Group parameters should be entered as required parameters** (length x width x height, carrying, _hiringPrice_, _currency_)
+- [x] **Product parameters should be entered as required parameters (length x width x height, weight).**
+- [x] Need to keep the `productList` for each Container Group in the main App state (see method `_updateProductListForContainerGroup (obj)` in `App` component).
 - [ ] **Hiring Price should be as input parameter for the particular Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productList` for the Container Group.
 - [ ] **POST request to Back-end for results.**
 Waggons number calculation for each Container Group.
@@ -29,7 +30,7 @@ The `containerGroupList` can be sent as:
     length: num,
     width: num,
     height: num,
-    hiringPrice: num,// Not realized yet...
+    hiringPrice: num,
     productList: [
       {
         id: str,
@@ -55,14 +56,15 @@ Result can be returned as:
     productList: [
       {
         id: str,
-        deliveryPrice: num// Not realized yet...
+        deliveryPrice: num,
+        coordinates: { x: num, y: num }
       }
     ]
   }
 ]
 ```
-- [ ] **Save input & output data to localStorage.**
-- [ ] **Render 3D model in new window & Link to 3D model for other users.**
+- [ ] **Also on Back-end need to form the link to Front-end for 3D model visualization.** _Shoul be taken with response from Back-end._
+- [ ] **Additional web-page for render 3D model.**
 
 _Under construction yet..._
 

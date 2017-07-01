@@ -10,7 +10,7 @@ import { show, ACTION_TYPE } from 'js-snackbar';
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
 show({
-  text: 'Last update at 2017-06-19',
+  text: 'Last update at 2017-06-24',
   pos: 'top-right',
   customClass: 'snackbar-default',
   duration: 35000,
@@ -60,6 +60,7 @@ class App extends Component {
     this.editContainerGroup = this.editContainerGroup.bind(this);
     this.addContainerGroupFormToggler = this.addContainerGroupFormToggler.bind(this);
     this._updateProductListForContainerGroup = this._updateProductListForContainerGroup.bind(this);
+    this.test = this.test.bind(this);
   }
   saveContainerGroup(obj) {
     let _getUUID = () => {
@@ -162,13 +163,19 @@ class App extends Component {
     this.setState({containerGroupList});
     show({ text: `Productlist for Container Group has updated...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 2000 });
   }
+  test() {
+    console.log('hello world');
+    //..
+  }
   render() {
     return (
       <div className='container'>
         <h1>Cargo-React</h1>
         <div className='text-center' style={{marginBottom:'5px'}}>
-          <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
+          <div className='btn-group' role='group'>
+            <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
         </div>
+      </div>
 
         <AddContainerGroupForm
           addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
