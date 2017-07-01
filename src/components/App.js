@@ -9,7 +9,7 @@ import { show, ACTION_TYPE } from 'js-snackbar';
 // Require css for your app's bundle process
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
-/*
+
 show({
   text: 'Test msg / Last update at 2017-07-01',
   pos: 'top-right',
@@ -25,7 +25,7 @@ show({
     x.close();
     element.style.opacity = 0;
   }
-});*/
+});
 
 /*
 *                             COMPONENT STRUCTURE
@@ -108,8 +108,8 @@ class App extends Component {
       return newUUID;
     };
 
-    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.carrying===`` || obj.hiringPrice===``){
-      show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
+    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.carrying===`` || obj.hiringPrice===`` || obj.currency===``){
+      show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 10000 });
       return;
     }
 
@@ -144,7 +144,7 @@ class App extends Component {
         show({ text: err_msg, pos: 'top-right', customClass: 'snackbar-danger', duration: 20000 });
         return;
       }else{
-        show({ text: `Dimentions are tested. It's Ok.`, pos: 'top-right', customClass: 'snackbar-primary', duration: 5000 });
+        show({ text: `Dimentions are tested. It's Ok.`, pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
       }
     }
     // --- Checked and Tested.
