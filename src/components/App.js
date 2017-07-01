@@ -9,12 +9,9 @@ import { show, ACTION_TYPE } from 'js-snackbar';
 // Require css for your app's bundle process
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
+/*
 show({
-<<<<<<< HEAD
-  text: 'Last update at 2017-06-24',
-=======
-  text: 'Last update at 2017-06-29',
->>>>>>> origin/master
+  text: 'Test msg / Last update at 2017-07-01',
   pos: 'top-right',
   customClass: 'snackbar-default',
   duration: 35000,
@@ -28,7 +25,7 @@ show({
     x.close();
     element.style.opacity = 0;
   }
-});
+});*/
 
 /*
 *                             COMPONENT STRUCTURE
@@ -45,7 +42,8 @@ show({
           length: num,
           width: num,
           height: num,
-          hiringPrice: num, // not used yet...
+          hiringPrice: num, // not realized yet...
+          currency: str, // not realized yet...
           productList: [
             {
               id: str,
@@ -102,8 +100,42 @@ class App extends Component {
       return;
     }
 
-    // Need to check the dimentions and weight for each product before save (refresh) parameters of the particular Container Group
+    // --- Need to check the dimentions and weight for each product before save (refresh) parameters of the particular Container Group
+    if(obj.productList.length!==0){
+      //show({ text: `INFO: productList.length is not zero ${obj.productList.length}`, pos: 'top-right', customClass: 'snackbar-default', duration: 10000 });
+      let flag = true, err_msg = '';
+      obj.productList.map((e, i) => {//console.log(JSON.stringify(obj));
+        /* Remember:
+            obj dims - is the Container dimentions
+            e dims - is the Product dimentions
+        */
+        // Firstly we have to detect max dimentions of the Container and max weight that it can to accept.
+        let maxHeigth = obj.height,
+          maxWeigth = obj.carrying;
+        let conditional_maxLength, conditional_maxWidth;
+        if(obj.length >= obj.width){
+          conditional_maxLength = obj.length; conditional_maxWidth = obj.width;
+        }else{ conditional_maxLength = obj.width; conditional_maxWidth = obj.length }
+        // Then we have to check the product parameters before add it to productList:
+        let conditional_length, conditional_width;
+        if(e.length >= e.width){
+          conditional_length = e.length; conditional_width = e.width;
+        }else{ conditional_length = e.width; conditional_width = e.length }
+        if(conditional_length > conditional_maxLength){ err_msg = `${e.name} has problems! His most dimention is more than maxLength: ${conditional_length} > ${conditional_maxLength} mm! It's not Ok.`; flag = false; }
+        if(conditional_width > conditional_maxWidth){ err_msg = `${e.name} has problems! His smallest dimention is more than maxWidth: ${conditional_width} > ${conditional_maxWidth} mm! It's not Ok.`; flag = false; }
+        if(e.height > maxHeigth){ err_msg = `${e.name} has problems! His height is more than maxHeigth: ${e.height} > ${maxHeigth} mm! It's not Ok.`; flag = false; }
+        if(e.weight > maxWeigth){ err_msg = `${e.name} has problems! His weight is more than maxWeigth: ${e.weight} > ${maxWeigth} kg! It's not Ok.`; flag = false; }
+      });
+
+      if(flag===false){
+        show({ text: err_msg, pos: 'top-right', customClass: 'snackbar-danger', duration: 20000 });
+        return;
+      }else{
+        show({ text: `Dimentions are tested. It's Ok.`, pos: 'top-right', customClass: 'snackbar-primary', duration: 5000 });
+      }
+    }
     //..
+    // ---
 
     let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
@@ -112,7 +144,7 @@ class App extends Component {
     this.setState({ containerGroupList });
     this.updateContainerGroupFormState('clearForm');
     this.addContainerGroupFormToggler(false);
-    show({ text: `It's Ok. Container Group saved as ${obj.name}...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
+    //show({ text: `It's Ok. Container Group saved as ${obj.name}...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
   }
   removeContainerGroup(id) {
     let containerGroupList = this.state.containerGroupList.filter( (e, i) => e.id !== id );
@@ -203,7 +235,7 @@ class App extends Component {
         <div className='text-center' style={{marginBottom:'5px'}}>
           <div className='btn-group' role='group'>
             <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
-            <Button handlerClick={ this.test } iclassName='fa fa-question' tmp={'[ Test ]'} />
+            <Button handlerClick={ this.test } iclassName='fa fa-circle-o' tmp={'[ Test ]'} />
         </div>
       </div>
 

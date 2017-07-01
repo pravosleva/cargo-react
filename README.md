@@ -1,4 +1,4 @@
-# Cargo transport from Counrty A oto Country B calculation based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
+# Cargo transport from Counrty A to Country B calculation based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
 
 ## Terminology
 
@@ -15,9 +15,9 @@ _Under construction yet..._
 ## Tasklist (2 of 9 are completed)
 
 - [ ] **Container Group parameters should be entered as required parameters** (length x width x height, carrying, _hiringPrice_, _currency_)
-- [x] **Product parameters should be entered as required parameters (length x width x height, weight).**
+- [ ] **Product parameters should be entered as required parameters.** (length x width x height, weight, _addSize_)
 - [x] Need to keep the `productList` for each Container Group in the main App state (see method `_updateProductListForContainerGroup (obj)` in `App` component).
-- [ ] **Need to check that can the product fit in a container.** See method `saveProduct (obj)` in `Cargo` component. Criteria for verification: maxLength, maxWidth, maxHeigth, maxWeight. Also we will should do it after update the Container Group parameters (in the same method).
+- [x] **Need to check that can the product fit in a container.** See method `saveProduct (obj)` in `Cargo` component. Criteria for verification: maxLength, maxWidth, maxHeigth, maxWeight. Also we will should do it after update the Container Group parameters (in the same method).
 - [ ] **Hiring Price should be as input parameter for the particular Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productList` for the Container Group.
 - [ ] **POST request to Back-end for results.**
 Waggons number calculation for each Container Group.
@@ -32,6 +32,7 @@ The `containerGroupList` can be sent as:
     width: num,
     height: num,
     hiringPrice: num,
+    currency: str,
     productList: [
       {
         id: str,
@@ -58,6 +59,7 @@ Result can be returned as:
       {
         id: str,
         deliveryPrice: num,
+        currency: str,
         coordinates: { x: num, y: num }
       }
     ]
