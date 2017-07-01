@@ -1,4 +1,4 @@
-# Cargo transport from Counrty A to Country B calculation based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
+# Cargo transport from Counrty A to Country B calc based on [clientlist](https://github.com/pravosleva/clientlist-test-react)
 
 ## Terminology
 
@@ -12,13 +12,13 @@
 
 _Under construction yet..._
 
-## Tasklist (2 of 9 are completed)
+## Tasklist (3 of 9 are completed)
 
 - [ ] **Container Group parameters should be entered as required parameters** (length x width x height, carrying, _hiringPrice_, _currency_)
-- [ ] **Product parameters should be entered as required parameters.** (length x width x height, weight, _addSize_)
+- [x] **Product parameters should be entered as required parameters.** (length x width x height, weight, addSize)
 - [x] Need to keep the `productList` for each Container Group in the main App state (see method `_updateProductListForContainerGroup (obj)` in `App` component).
 - [x] **Need to check that can the product fit in a container.** See method `saveProduct (obj)` in `Cargo` component. Criteria for verification: maxLength, maxWidth, maxHeigth, maxWeight. Also we will should do it after update the Container Group parameters (in the same method).
-- [ ] **Hiring Price should be as input parameter for the particular Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productList` for the Container Group.
+- [ ] **Hiring Price and Currency should be as input parameters for the particular Container Group.** Then Delivery Price should be returned from Back-end as prop `deliveryPrice` for each product in `productList` for the Container Group (It's other task for Back-end side).
 - [ ] **POST request to Back-end for results.**
 Waggons number calculation for each Container Group.
 The `containerGroupList` can be sent as:
@@ -67,7 +67,7 @@ Result can be returned as:
 ]
 ```
 - [ ] **Also on Back-end need to form the link to Front-end for 3D model visualization.** _Shoul be taken with response from Back-end._
-- [ ] **Additional web-page for render 3D model.**
+- [ ] **Additional web-page for 3D model render.**
 
 _Under construction yet..._
 

@@ -19,7 +19,11 @@ class ProductList extends Component {
             <strong>Name: {e.name===``?`_`:e.name}</strong>
             <br />
             <span>Dimentions: {e.length===``?`_`:e.length} x {e.width===``?`_`:e.width} x {e.height===``?`_`:e.height} mm ({e.weight===``?`_`:e.weight} kg)</span>
-          </li>
+            <br />
+            <span className='text-muted'>Addidional size: {e.addSize===``?`_`:e.addSize} mm</span>
+            <br />
+            {e.comment?<span className='text-muted'>Comment: {e.comment}</span>:null}
+        </li>
         },
         this
       ).reverse();

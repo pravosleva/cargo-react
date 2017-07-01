@@ -13,9 +13,10 @@ class AddProductForm extends Component {
       width = this.props.productFormState.width,
       height = this.props.productFormState.height,
       weight = this.props.productFormState.weight,
-      comment = this.props.productFormState.comment;
+      comment = this.props.productFormState.comment,
+      addSize = this.props.productFormState.addSize;
     //..
-    this.props.saveProduct({name, length, width, height, weight, comment});
+    this.props.saveProduct({name, length, width, height, weight, comment, addSize});
   }
   render() {
     return (
@@ -39,6 +40,8 @@ class AddProductForm extends Component {
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'weight')} value={this.props.productFormState.weight}></input>
             </div>
             <div className='col-lg-6 col-md-4 col-sm-4 col-xs-12'>
+              <label>addSize, mm</label>
+              <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'addSize')} value={this.props.productFormState.addSize}></input>
               <label>Comment</label>
               <textarea className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'comment')} value={this.props.productFormState.comment}></textarea>
             </div>

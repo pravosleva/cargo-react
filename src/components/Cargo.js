@@ -15,7 +15,7 @@ class Cargo extends Component {
     super(props);
     this.state = {
       addProductFormOpened: false,
-      productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: ''}
+      productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: '', addSize: ''}
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
     this.saveProduct = this.saveProduct.bind(this);
@@ -36,7 +36,7 @@ class Cargo extends Component {
       return newUUID;
     };
 
-    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.weight===``){
+    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.weight===`` || obj.addSize===``){
       show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
     }else{
@@ -49,17 +49,21 @@ class Cargo extends Component {
       // Then we have to check the product parameters before add it to productList:
       let conditional_length, conditional_width;
       if(obj.length > obj.width){
-        conditional_length = obj.length;
-        conditional_width = obj.width;
+        conditional_length = (obj.length + obj.addSize);
+        conditional_width = (obj.width + obj.addSize);
       }else{
-        conditional_length = obj.width;
-        conditional_width = obj.length;
+        conditional_length = (obj.width + obj.addSize);
+        conditional_width = (obj.length + obj.addSize);
       }
-      if(conditional_length > maxLength){ show({ text: `The most dimention is more than maxLength = ${maxLength} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
-      if(conditional_width > maxWidth){ show({ text: `The smallest dimention is more than maxWidth = ${maxWidth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
-      if(obj.height > maxHeigth){ show({ text: `Height is more than maxHeigth = ${maxHeigth} mm! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
-      if(obj.weight > maxWeigth){ show({ text: `Weight is more than maxWeigth = ${maxWeigth} kg! Aborted.`, pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 }); return; }
-      // --- Checked
+      let flag = true, err_msg = '';
+      if(conditional_length > maxLength){ err_msg = `The most cond. dimention (with addSize = ${obj.addSize} mm) is more than maxLength: ${conditional_length} > ${maxLength} mm! Check it please.`; flag = false; }
+      if(conditional_width > maxWidth){ err_msg = `The smallest cond. dimention (with addSize = ${obj.addSize} mm) is more than maxWidth: ${conditional_width} > ${maxWidth} mm! Check it please.`; flag = false; }
+      if(obj.height > maxHeigth){ err_msg = `Height is more than maxHeigth: ${obj.height} > ${maxHeigth} mm! Check it please.`; flag = false; }
+      if(obj.weight > maxWeigth){ err_msg = `Weight is more than maxWeigth: ${obj.weight} > ${maxWeigth} kg! Check it please.`; flag = false; }
+      if(flag===false){
+        show({ text: err_msg, pos: 'top-right', customClass: 'snackbar-danger', duration: 20000 }); return;
+      }
+      // --- Checked.
       // If was not return that's Ok, we are continue:
       obj.id = _getUUID();
       let productList = this.props.productList;
@@ -82,39 +86,41 @@ class Cargo extends Component {
       width = this.state.productFormState.width,
       height = this.state.productFormState.height,
       weight = this.state.productFormState.weight,
-      comment = this.state.productFormState.comment;
+      comment = this.state.productFormState.comment,
+      addSize = this.state.productFormState.addSize;
     let _getNumericValue = (val) => { return (val!=="" && !isNaN(val)) ? Number(val) : "" };
     switch(propName){
-      case 'name': this.setState({productFormState: {name: e.target.value, length, width, height, weight, comment}}); break;
+      case 'name': this.setState({productFormState: {name: e.target.value, length, width, height, weight, comment, addSize}}); break;
       case 'length':
         if(!isNaN(e.target.value)){
-          this.setState({productFormState: {name, length: _getNumericValue(e.target.value), width, height, weight, comment}});
+          this.setState({productFormState: {name, length: _getNumericValue(e.target.value), width, height, weight, comment, addSize}});
         }else{};
         break;
       case 'width':
         if(!isNaN(e.target.value)){
-          this.setState({productFormState: {name, length, width: _getNumericValue(e.target.value), height, weight, comment}});
+          this.setState({productFormState: {name, length, width: _getNumericValue(e.target.value), height, weight, comment, addSize}});
         }else{};
         break;
       case 'height':
         if(!isNaN(e.target.value)){
-          this.setState({productFormState: {name, length, width, height: _getNumericValue(e.target.value), weight, comment}});
+          this.setState({productFormState: {name, length, width, height: _getNumericValue(e.target.value), weight, comment, addSize}});
         }else{};
         break;
       case 'weight':
         if(!isNaN(e.target.value)){
-          this.setState({productFormState: {name, length, width, height, weight: _getNumericValue(e.target.value), comment}});
+          this.setState({productFormState: {name, length, width, height, weight: _getNumericValue(e.target.value), comment, addSize}});
         }else{};
         break;
-      case 'comment': this.setState({productFormState: {name, length, width, height, weight, comment: e.target.value}}); break;
-      case 'clearForm': this.setState({productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: ''}}); break;
+      case 'comment': this.setState({productFormState: {name, length, width, height, weight, comment: e.target.value, addSize}}); break;
+      case 'addSize': this.setState({productFormState: {name, length, width, height, weight, comment, addSize: _getNumericValue(e.target.value)}}); break;
+      case 'clearForm': this.setState({productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: '', addSize: ''}}); break;
       default: break;
     }
   }
   editProduct(id) {
     this.addProductFormToggler(true);
     let productToEdit = this.props.productList.filter( (e, i) => e.id === id )[0];
-    this.setState({ productFormState: {name: productToEdit.name, length: productToEdit.length, width: productToEdit.width, height: productToEdit.height, weight: productToEdit.weight, comment: productToEdit.comment} });
+    this.setState({ productFormState: {name: productToEdit.name, length: productToEdit.length, width: productToEdit.width, height: productToEdit.height, weight: productToEdit.weight, comment: productToEdit.comment, addSize: productToEdit.addSize} });
     this.removeProduct(id);
   }
   addProductFormToggler(is_it_should_be_opened) {

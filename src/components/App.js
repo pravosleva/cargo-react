@@ -64,7 +64,7 @@ show({
 *   |   |   |-- Cargo
                 state = {
                   addProductFormOpened: bool,
-                  productFormState: {name: str, length: num, width: num, height: num, weight: num}
+                  productFormState: {name: str, length: num, width: num, height: num, weight: num, addSize: num}
                 }
 *   |   |   |   |-- AddProductForm
 *   |   |   |   |-- ProductList
@@ -121,10 +121,10 @@ class App extends Component {
         if(e.length >= e.width){
           conditional_length = e.length; conditional_width = e.width;
         }else{ conditional_length = e.width; conditional_width = e.length }
-        if(conditional_length > conditional_maxLength){ err_msg = `${e.name} has problems! His most dimention is more than maxLength: ${conditional_length} > ${conditional_maxLength} mm! It's not Ok.`; flag = false; }
-        if(conditional_width > conditional_maxWidth){ err_msg = `${e.name} has problems! His smallest dimention is more than maxWidth: ${conditional_width} > ${conditional_maxWidth} mm! It's not Ok.`; flag = false; }
-        if(e.height > maxHeigth){ err_msg = `${e.name} has problems! His height is more than maxHeigth: ${e.height} > ${maxHeigth} mm! It's not Ok.`; flag = false; }
-        if(e.weight > maxWeigth){ err_msg = `${e.name} has problems! His weight is more than maxWeigth: ${e.weight} > ${maxWeigth} kg! It's not Ok.`; flag = false; }
+        if(conditional_length > conditional_maxLength){ err_msg = `${e.name} has problems! His most dimention is more than maxLength: ${conditional_length} > ${conditional_maxLength} mm! Check it please.`; flag = false; }
+        if(conditional_width > conditional_maxWidth){ err_msg = `${e.name} has problems! His smallest dimention is more than maxWidth: ${conditional_width} > ${conditional_maxWidth} mm! Check it please.`; flag = false; }
+        if(e.height > maxHeigth){ err_msg = `${e.name} has problems! His height is more than maxHeigth: ${e.height} > ${maxHeigth} mm! Check it please.`; flag = false; }
+        if(e.weight > maxWeigth){ err_msg = `${e.name} has problems! His weight is more than maxWeigth: ${e.weight} > ${maxWeigth} kg! Check it please.`; flag = false; }
       });
 
       if(flag===false){
@@ -134,8 +134,7 @@ class App extends Component {
         show({ text: `Dimentions are tested. It's Ok.`, pos: 'top-right', customClass: 'snackbar-primary', duration: 5000 });
       }
     }
-    //..
-    // ---
+    // --- Checked and Tested.
 
     let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
