@@ -41,8 +41,8 @@ show({
         carrying: num,
         productList: arr,
         comment: str,
-        hiringPrice: num, // not realized yet...
-        currency: str // not realized yet...
+        hiringPrice: num,
+        currency: str
       },
       containerGroupList: [
         {
@@ -52,8 +52,8 @@ show({
           length: num,
           width: num,
           height: num,
-          hiringPrice: num, // not realized yet...
-          currency: str, // not realized yet...
+          hiringPrice: num,
+          currency: str,
           productList: [
             {
               id: str,
