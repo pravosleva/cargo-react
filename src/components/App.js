@@ -33,7 +33,17 @@ show({
 * - App
     state = {
       addContainerFormOpened: bool,
-      containerGroupFormState: {name: str, length: num, width: num, height: num, carrying: num, productList: arr, comment: str},
+      containerGroupFormState: {
+        name: str,
+        length: num,
+        width: num,
+        height: num,
+        carrying: num,
+        productList: arr,
+        comment: str,
+        hiringPrice: num, // not realized yet...
+        currency: str // not realized yet...
+      },
       containerGroupList: [
         {
           id: str,
@@ -52,7 +62,8 @@ show({
               width: num,
               height: num,
               weight: num,
-              comment: str
+              comment: str,
+              addSize: num
             }
           ],
           comment: str
@@ -75,7 +86,9 @@ class App extends Component {
     super(props);
     this.state = {
       addContainerFormOpened: props.defaultAddContainerGroupFormOpened,
-      containerGroupFormState: {name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: ''},
+      containerGroupFormState: {
+        name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: '', hiringPrice: '', currency: ''
+      },
       containerGroupList: []
     }
     this.updateContainerGroupFormState = this.updateContainerGroupFormState.bind(this);
@@ -95,7 +108,7 @@ class App extends Component {
       return newUUID;
     };
 
-    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.carrying===``){
+    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.carrying===`` || obj.hiringPrice===``){
       show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
     }
@@ -156,37 +169,39 @@ class App extends Component {
       width = this.state.containerGroupFormState.width,
       height = this.state.containerGroupFormState.height,
       carrying = this.state.containerGroupFormState.carrying,
-      comment = this.state.containerGroupFormState.comment;
-    let _getNumericValue = (val) => {
-      return (val!=="" && !isNaN(val)) ? Number(val) : "";
-    };
+      comment = this.state.containerGroupFormState.comment,
+      hiringPrice = this.state.containerGroupFormState.hiringPrice;
+    let _getNumericValue = (val) => { return (val!=="" && !isNaN(val)) ? Number(val) : "" };
     switch(propName){
-      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length, height, width, carrying, productList, comment}}); break;
+      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length, height, width, carrying, productList, comment, hiringPrice}}); break;
       case 'length':
         if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length: _getNumericValue(e.target.value), height, width, carrying, productList, comment}}); break;
+          this.setState({containerGroupFormState: {name, length: _getNumericValue(e.target.value), height, width, carrying, productList, comment, hiringPrice}}); break;
         }else{};
         break;
       case 'height':
         if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length, height: _getNumericValue(e.target.value), width, carrying, productList, comment}}); break;
+          this.setState({containerGroupFormState: {name, length, height: _getNumericValue(e.target.value), width, carrying, productList, comment, hiringPrice}}); break;
         }else{};
         break;
       case 'width':
         if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length, height, width: _getNumericValue(e.target.value), carrying, productList, comment}}); break;
+          this.setState({containerGroupFormState: {name, length, height, width: _getNumericValue(e.target.value), carrying, productList, comment, hiringPrice}}); break;
         }else{};
         break;
       case 'carrying':
         if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length, height, width, carrying: _getNumericValue(e.target.value), productList, comment}}); break;
+          this.setState({containerGroupFormState: {name, length, height, width, carrying: _getNumericValue(e.target.value), productList, comment, hiringPrice}}); break;
         }else{};
         break;
       case 'comment':
-        this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment: e.target.value}});
+        this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment: e.target.value, hiringPrice}});
+        break;
+      case 'hiringPrice':
+        this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment, hiringPrice: _getNumericValue(e.target.value)}});
         break;
       case 'clearForm':
-        this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[], comment:''}});
+        this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[], comment:'', hiringPrice:''}});
         //console.log(`Attantion! The productList cleared in main state.`);
         break;
       default: break;
@@ -195,7 +210,7 @@ class App extends Component {
   editContainerGroup(id, productList) {
     this.addContainerGroupFormToggler(true);
     let containerGroupToEdit = this.state.containerGroupList.filter( (e, i) => e.id === id )[0];
-    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width, carrying: containerGroupToEdit.carrying, productList: productList, comment: containerGroupToEdit.comment} });
+    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width, carrying: containerGroupToEdit.carrying, productList: productList, comment: containerGroupToEdit.comment, hiringPrice: containerGroupToEdit.hiringPrice} });
     this.removeContainerGroup(id);
   }
   componentDidUpdate() {
@@ -221,7 +236,7 @@ class App extends Component {
     });
     // Refresh containerGroupData for this state:
     this.setState({containerGroupList});
-    show({ text: `Productlist for Container Group has updated...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 2000 });
+    show({ text: `Productlist for Container Group updated...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 2000 });
   }
   test() {
     console.log('hello world');

@@ -13,8 +13,9 @@ class AddContainerGroupForm extends Component {
       width = this.props.containerGroupFormState.width,
       height = this.props.containerGroupFormState.height,
       carrying = this.props.containerGroupFormState.carrying,
-      comment = this.props.containerGroupFormState.comment;
-    this.props.saveContainerGroup({name, length, width, height, carrying, productList: this.props.containerGroupFormState.productList, comment});
+      comment = this.props.containerGroupFormState.comment,
+      hiringPrice = this.props.containerGroupFormState.hiringPrice;
+    this.props.saveContainerGroup({name, length, width, height, carrying, productList: this.props.containerGroupFormState.productList, comment, hiringPrice});
   }
   render() {
     return (
@@ -26,17 +27,19 @@ class AddContainerGroupForm extends Component {
             <div className='row'>
               <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
                 <label>Name</label>
-                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'name', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.name}></input>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'name', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.name} />
                 <label>Carrying, kg</label>
-                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.carrying}></input>
-              </div>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.carrying} />
+                <label>Hiring Price</label>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'hiringPrice', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.hiringPrice} />
+            </div>
               <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
                 <label>Length, mm</label>
-                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'length', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.length}></input>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'length', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.length} />
                 <label>Width, mm</label>
-                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'width', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.width}></input>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'width', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.width} />
                 <label>Height, mm</label>
-                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'height', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.height}></input>
+                <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'height', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.height} />
               </div>
               <div className='col-lg-6 col-md-4 col-sm-4 col-xs-12'>
                 <label>Comment</label>

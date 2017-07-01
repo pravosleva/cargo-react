@@ -41,7 +41,8 @@ The `containerGroupList` can be sent as:
         width: num,
         height: num,
         weight: num,
-        comment: str
+        comment: str,
+        addSize: num
       }
     ],
     comment: str

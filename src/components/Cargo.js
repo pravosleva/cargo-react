@@ -136,8 +136,8 @@ class Cargo extends Component {
   render() {
     return (
       <div>
-        <strong>Cargo</strong><br />
-        <span>Product list for the Container group.</span>
+        <strong>Cargo Section</strong><br />
+        <span>ProductList for the Container Group.</span>
 
         <div className='text-center' style={{marginBottom:'5px'}}>
           <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />

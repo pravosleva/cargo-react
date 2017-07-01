@@ -40,7 +40,7 @@ class AddProductForm extends Component {
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'weight')} value={this.props.productFormState.weight}></input>
             </div>
             <div className='col-lg-6 col-md-4 col-sm-4 col-xs-12'>
-              <label>addSize, mm</label>
+              <label>Additional size, mm</label>
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'addSize')} value={this.props.productFormState.addSize}></input>
               <label>Comment</label>
               <textarea className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'comment')} value={this.props.productFormState.comment}></textarea>
