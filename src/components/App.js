@@ -11,7 +11,7 @@ import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
 
 show({
-  text: 'Test msg / Last update at 2017-07-01',
+  text: 'Last update at 2017-07-03',
   pos: 'top-right',
   customClass: 'snackbar-default',
   duration: 35000,
@@ -152,6 +152,14 @@ class App extends Component {
     let containerGroupList = this.state.containerGroupList;
     obj.id = _getUUID();
     obj.productList ? obj.productList = obj.productList : obj.productList = [];
+
+    // Max dim should be saved as length:
+    let { length: _containerLength, width: _containerWidth } = obj;
+    if(_containerLength < _containerWidth){
+      obj.length = _containerWidth;
+      obj.width = _containerLength;
+    }
+
     containerGroupList.push(obj);
     this.setState({ containerGroupList });
     this.updateContainerGroupFormState('clearForm');
