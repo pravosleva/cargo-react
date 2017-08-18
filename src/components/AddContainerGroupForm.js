@@ -29,13 +29,13 @@ class AddContainerGroupForm extends Component {
             <div className='row'>
               <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
 
-                <label>Name</label>
+                <label>Container Group name</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'name', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.name} />
 
-                <label>Carrying, kg</label>
+                <label>Carrying of one unit, kg</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'carrying', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.carrying} />
 
-                <label>Hiring Price</label>
+                <label>Hiring Price of one unit</label>
                 <div className="input-group">
                   <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'hiringPrice', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.hiringPrice} />
                   <span className="input-group-btn dropdown">
@@ -65,11 +65,11 @@ class AddContainerGroupForm extends Component {
               </div>
 
               <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
-                <label>Length, mm</label>
+                <label>Length of one unit, mm</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'length', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.length} />
-                <label>Width, mm</label>
+                <label>Width of one unit, mm</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'width', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.width} />
-                <label>Height, mm</label>
+                <label>Height of one unit, mm</label>
                 <input className='form-control input-sm' onChange={this.props.updateContainerGroupFormState.bind(this, 'height', this.props.containerGroupFormState.productList)} value={this.props.containerGroupFormState.height} />
               </div>
               <div className='col-lg-6 col-md-4 col-sm-4 col-xs-12'>
@@ -81,7 +81,7 @@ class AddContainerGroupForm extends Component {
             <hr />
 
             <p className='text-muted'>
-              Enter parameters for each Container of this containerGroup
+              Will you please enter the parameters for each Container of this containerGroup
               <br />
               {`this.props.containerGroupFormState.productList = ${JSON.stringify(this.props.containerGroupFormState.productList)}`}
             </p>

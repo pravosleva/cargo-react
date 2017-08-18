@@ -26,7 +26,7 @@ class AddProductForm extends Component {
         <div className='panel-body'>
           <div className='row'>
             <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
-              <label>Name</label>
+              <label>Product name</label>
               <input className='form-control input-sm'  onChange={this.props.updateProductFormState.bind(this, 'name')} value={this.props.productFormState.name}></input>
             </div>
             <div className='col-lg-3 col-md-4 col-sm-4 col-xs-12'>
