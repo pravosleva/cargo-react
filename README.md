@@ -75,7 +75,7 @@ _Under construction yet..._
 
 ## Demo
 
-[Link](http://selection4test.ru/projects/cargo-react/index.html)
+[Link](http://selection4test.ru/projects/cargo-react)
 
 # Original ReadMe
 
