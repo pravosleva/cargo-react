@@ -37,7 +37,7 @@ class Cargo extends Component {
     };
 
     if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.weight===`` || obj.addSize===``){
-      show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 5000 });
+      show({ text: 'Some inputs are required! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
     }else{
       // --- Need to check that will the product fit in a container. If it is true then continue, else return.
@@ -61,7 +61,7 @@ class Cargo extends Component {
       if(obj.height > maxHeigth){ err_msg = `Height is more than maxHeigth: ${obj.height} > ${maxHeigth} mm! Check it please.`; flag = false; }
       if(obj.weight > maxWeigth){ err_msg = `Weight is more than maxWeigth: ${obj.weight} > ${maxWeigth} kg! Check it please.`; flag = false; }
       if(flag===false){
-        show({ text: err_msg, pos: 'top-right', customClass: 'snackbar-danger', duration: 20000 }); return;
+        show({ text: err_msg, pos: 'bottom-right', customClass: 'snackbar-danger', duration: 20000 }); return;
       }
       // --- Checked.
       // If was not return that's Ok, we are continue:

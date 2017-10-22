@@ -4,6 +4,8 @@ import Button from './Button';
 import AddContainerGroupForm from './AddContainerGroupForm';
 import ContainerGroupList from './ContainerGroupList';
 
+import axios from 'axios';
+
 // The snackbar and test for him:
 import { show, ACTION_TYPE } from 'js-snackbar';
 // Require css for your app's bundle process
@@ -12,7 +14,7 @@ import '../css/snackbar-custom.css';
 
 show({
   text: 'Last update at 2017-07-03',
-  pos: 'top-right',
+  pos: 'bottom-right',
   customClass: 'snackbar-default',
   duration: 35000,
   actionText: 'Send FeedBack&nbsp;&nbsp;&#9993;',// For ACTION_TYPE.TEXT
@@ -97,7 +99,7 @@ class App extends Component {
     this.editContainerGroup = this.editContainerGroup.bind(this);
     this.addContainerGroupFormToggler = this.addContainerGroupFormToggler.bind(this);
     this._updateProductListForContainerGroup = this._updateProductListForContainerGroup.bind(this);
-    this.test = this.test.bind(this);
+    this._getResultAsPOST = this._getResultAsPOST.bind(this);
   }
   saveContainerGroup(obj) {
     let _getUUID = () => {
@@ -109,13 +111,13 @@ class App extends Component {
     };
 
     if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.carrying===`` || obj.hiringPrice===`` || obj.currency===``){
-      show({ text: 'Some inputs are required! Please, check the input form', pos: 'top-right', customClass: 'snackbar-danger', duration: 10000 });
+      show({ text: 'Some inputs are required! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 10000 });
       return;
     }
 
     // --- Need to check the dimentions and weight for each product before save (refresh) parameters of the particular Container Group
     if(obj.productList.length!==0){
-      //show({ text: `INFO: productList.length is not zero ${obj.productList.length}`, pos: 'top-right', customClass: 'snackbar-default', duration: 10000 });
+      //show({ text: `INFO: productList.length is not zero ${obj.productList.length}`, pos: 'bottom-right', customClass: 'snackbar-default', duration: 10000 });
       let flag = true, err_msg = '';
       obj.productList.map((e, i) => {//console.log(JSON.stringify(obj));
         /* Remember:
@@ -141,10 +143,10 @@ class App extends Component {
       });
 
       if(flag===false){
-        show({ text: err_msg, pos: 'top-right', customClass: 'snackbar-danger', duration: 20000 });
+        show({ text: err_msg, pos: 'bottom-right', customClass: 'snackbar-danger', duration: 20000 });
         return;
       }else{
-        show({ text: `Dimentions are tested. It's Ok.`, pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
+        show({ text: `Dimentions are tested. It's Ok.`, pos: 'bottom-right', customClass: 'snackbar-primary', duration: 10000 });
       }
     }
     // --- Checked and Tested.
@@ -164,7 +166,7 @@ class App extends Component {
     this.setState({ containerGroupList });
     this.updateContainerGroupFormState('clearForm');
     this.addContainerGroupFormToggler(false);
-    //show({ text: `It's Ok. Container Group saved as ${obj.name}...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 10000 });
+    //show({ text: `It's Ok. Container Group saved as ${obj.name}...`, pos: 'bottom-right', customClass: 'snackbar-primary', duration: 10000 });
   }
   removeContainerGroup(id) {
     let containerGroupList = this.state.containerGroupList.filter( (e, i) => e.id !== id );
@@ -248,11 +250,24 @@ class App extends Component {
     });
     // Refresh containerGroupData for this state:
     this.setState({containerGroupList});
-    show({ text: `Productlist for Container Group updated...`, pos: 'top-right', customClass: 'snackbar-primary', duration: 2000 });
+    show({ text: `Productlist for Container Group updated...`, pos: 'bottom-right', customClass: 'snackbar-primary', duration: 2000 });
   }
-  test() {
-    console.log('hello world');
-    //..
+  _getResultAsPOST(){
+    let containerGroupList = this.state.containerGroupList;
+    axios({
+      method: 'post',
+      url: 'http://selection4test.ru/projects/cargo-3d/retail',
+      data: {
+        'containerGroupList': containerGroupList
+      }
+    })
+    .then(function(res){
+      console.log(res);
+    })
+    .catch(function(err){
+      console.error(err);
+    });
+    console.log('POST should be here...');
   }
   render() {
     return (
@@ -261,7 +276,7 @@ class App extends Component {
         <div className='text-center' style={{marginBottom:'5px'}}>
           <div className='btn-group' role='group'>
             <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
-            <Button handlerClick={ this.test } iclassName='fa fa-circle-o' tmp={'[ Test ]'} />
+            <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cogs' tmp={'[ POST to get the result ]'} />
         </div>
       </div>
 
