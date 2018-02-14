@@ -4,12 +4,14 @@
 
 - _Container Group_ (should be formed by user) - is the Group of Containers one and the same particular type (dimentions and carrying that should be entered by user) and one and the same particular hiring price (that should be entered by user). In other words it is the motorcade of the Waggons (Containers).
 - _Product_ - is the one item of equipmentlist to transport (productlist) in this Container Group.
+- _Productlist_ - items list of equipment units which should be transported by this Container Group.
 - _Cargo_ - is the equipmentlist (productlist) for the particular Container Group.
 - _Additional Size_ - is the horizontal Additional (padding) Size for each Product in Container.
 - _Hiring Price & Currency_ (input parameter) - is the Hiring Price (in particular Currency) for each unit of the particular Container Group.
 - _Delivery Price_ (output parameter) - is the Delivery Price for each product (unit) of equipmentlist (productlist) for the particular Container Group.
 - _Country A_ - is the point of departure.
 - _Country B_ - is the destination.
+- _Auxiliary CompressAlgorythm_ - _Under construction..._
 
 _Under construction yet..._
 
@@ -18,8 +20,10 @@ _Under construction yet..._
 ![Demo gif](./_img/test-0.gif)
 [Link to Life Demo](http://selection4test.ru/projects/cargo-react)
 
-## Tasklist (4 of 9 are completed)
+## TODO
 
+- [ ] New `App` state prop `containerGroupListSorted` as result of sort Productlist to Containers by sizes and summary weight. Shouold be used as `treeData` prop of `SortableTree` component (`react-sortable-tree` included to project).
+- [ ] **Auxiliary CompressAlgorythm** to compress the Productlist for minimal Containers number
 - [x] **Container Group parameters should be entered as required parameters** (length x width x height, carrying, hiringPrice, currency)
 - [x] **Product parameters should be entered as required parameters.** (length x width x height, weight, addSize)
 - [x] Need to keep the `productList` for each Container Group in the main App state (see method `_updateProductListForContainerGroup (obj)` in `App` component).

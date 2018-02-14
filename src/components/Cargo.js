@@ -15,7 +15,8 @@ class Cargo extends Component {
     super(props);
     this.state = {
       addProductFormOpened: false,
-      productFormState: {name: '', length: '', width: '', height: '', weight: '', comment: '', addSize: ''}
+      productFormState: { name: '', length: '', width: '', height: '', weight: '', comment: '', addSize: '' },
+      
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
     this.saveProduct = this.saveProduct.bind(this);
@@ -80,7 +81,7 @@ class Cargo extends Component {
 
     this._updateProductListForContainerGroup(productList);
   }
-  updateProductFormState(propName, e) {
+  updateProductFormState(propName, e) { // SHOULD BE REFACTORED!
     let name = this.state.productFormState.name,
       length = this.state.productFormState.length,
       width = this.state.productFormState.width,

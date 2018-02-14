@@ -12,6 +12,9 @@ import { show, ACTION_TYPE } from 'js-snackbar';
 import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
 
+import SortableTree from 'react-sortable-tree';
+import 'react-sortable-tree/style.css'; // This only needs to be imported once in your app
+
 show({
   text: 'Last update at 2018-02-14',
   pos: 'bottom-right',
@@ -83,6 +86,23 @@ show({
 *   |   |   |   |-- ProductList
 */
 
+class TreeExample extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div style={{ height: 400 }}>
+        <SortableTree
+          treeData={this.props.treeData}
+          onChange={treeData => this.props.setTreeData(treeData)}
+        />
+      </div>
+    );
+  }
+}
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -91,7 +111,13 @@ class App extends Component {
       containerGroupFormState: {
         name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: '', hiringPrice: '', currency: ''
       },
-      containerGroupList: []
+      containerGroupList: [],
+      containerGroupListSorted: [{ title: 'Chicken', children: [{ title: 'Egg' }] }],
+      /*
+        containerGroupListSorted as result of sotr to Containers by sizes and summary weight
+        For example:
+        [{ title: 'Chicken', children: [{ title: 'Egg' }] }]
+      */
     }
     this.updateContainerGroupFormState = this.updateContainerGroupFormState.bind(this);
     this.saveContainerGroup = this.saveContainerGroup.bind(this);
@@ -252,13 +278,21 @@ class App extends Component {
   render() {
     return (
       <div className='container'>
+
         <h1>Cargo-React</h1>
+
+        <h2>Tree example</h2>
+        <div className='shadow'>
+          <TreeExample treeData={ this.state.containerGroupListSorted } setTreeData={ (treeData) => {this.setState({ containerGroupListSorted: treeData })} } />
+        </div>
+
+        <h2>Cargo</h2>
         <div className='text-center' style={{marginBottom:'5px'}}>
           <div className='btn-group' role='group'>
-            <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
-            <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cogs' tmp={'POST test'} />
+              <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
+              <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cogs' tmp={'POST test'} />
+          </div>
         </div>
-      </div>
 
         <AddContainerGroupForm
           addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
@@ -271,6 +305,7 @@ class App extends Component {
           removeContainerGroup={this.removeContainerGroup}
           editContainerGroup={this.editContainerGroup}
           updateProductListForContainerGroup={this._updateProductListForContainerGroup} />
+
       </div>
     );
   }
