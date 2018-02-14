@@ -48,7 +48,7 @@ class AddProductForm extends Component {
           </div>
           <hr />
           <p className='text-muted'>
-            Attantion! Parameters of the Product can't be more than dimentions and carrying capacity of item of the Container Group.
+            Attantion! Parameters of the Product cant be more than dimensions and carrying capacity of item of the Container Group.
           </p>
         </div>
         <div className='panel-footer'>

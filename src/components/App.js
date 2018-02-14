@@ -13,7 +13,7 @@ import '../../node_modules/js-snackbar/dist/snackbar.css';
 import '../css/snackbar-custom.css';
 
 show({
-  text: 'Last update at 2017-07-03',
+  text: 'Last update at 2018-02-14',
   pos: 'bottom-right',
   customClass: 'snackbar-default',
   duration: 35000,
@@ -110,21 +110,21 @@ class App extends Component {
       return newUUID;
     };
 
-    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.carrying===`` || obj.hiringPrice===`` || obj.currency===``){
+    if(!obj.name || !obj.length || !obj.width || !obj.height || !obj.carrying || !obj.hiringPrice || !obj.currency){
       show({ text: 'Some inputs are required! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 10000 });
       return;
     }
 
-    // --- Need to check the dimentions and weight for each product before save (refresh) parameters of the particular Container Group
-    if(obj.productList.length!==0){
+    // --- Need to check the dimensions and weight for each product before save (refresh) parameters of the particular Container Group
+    if(obj.productList.length){
       //show({ text: `INFO: productList.length is not zero ${obj.productList.length}`, pos: 'bottom-right', customClass: 'snackbar-default', duration: 10000 });
       let flag = true, err_msg = '';
       obj.productList.map((e, i) => {//console.log(JSON.stringify(obj));
         /* Remember:
-            obj dims - is the Container dimentions
-            e dims - is the Product dimentions
+            obj dims - is the Container dimensions
+            e dims - is the Product dimensions
         */
-        // Firstly we have to detect max dimentions of the Container and max weight that it can to accept.
+        // Firstly we have to detect max dimensions of the Container and max weight that it can to accept.
         let maxHeigth = obj.height,
           maxWeigth = obj.carrying;
         let conditional_maxLength, conditional_maxWidth;
@@ -174,52 +174,32 @@ class App extends Component {
   }
   updateContainerGroupFormState(propName, productList, e) {
     //console.log(`e.target.value before: ${e.target.value}`);
-    let name = this.state.containerGroupFormState.name,
-      length = this.state.containerGroupFormState.length,
-      width = this.state.containerGroupFormState.width,
-      height = this.state.containerGroupFormState.height,
-      carrying = this.state.containerGroupFormState.carrying,
-      comment = this.state.containerGroupFormState.comment,
-      hiringPrice = this.state.containerGroupFormState.hiringPrice,
-      currency = this.state.containerGroupFormState.currency;
+    let { containerGroupFormState } = this.state;
     let _getNumericValue = (val) => { return (val!=="" && !isNaN(val)) ? Number(val) : "" };
     switch(propName){
-      case 'name': this.setState({containerGroupFormState: {name: e.target.value, length, height, width, carrying, productList, comment, hiringPrice, currency}}); break;
-      case 'length':
-        if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length: _getNumericValue(e.target.value), height, width, carrying, productList, comment, hiringPrice, currency}}); break;
-        }else{};
-        break;
-      case 'height':
-        if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length, height: _getNumericValue(e.target.value), width, carrying, productList, comment, hiringPrice, currency}}); break;
-        }else{};
-        break;
-      case 'width':
-        if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length, height, width: _getNumericValue(e.target.value), carrying, productList, comment, hiringPrice, currency}}); break;
-        }else{};
-        break;
-      case 'carrying':
-        if(!isNaN(e.target.value)){
-          this.setState({containerGroupFormState: {name, length, height, width, carrying: _getNumericValue(e.target.value), productList, comment, hiringPrice, currency}}); break;
-        }else{};
-        break;
-      case 'comment':
-        this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment: e.target.value, hiringPrice, currency}});
-        break;
-      case 'hiringPrice':
-        this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment, hiringPrice: _getNumericValue(e.target.value), currency}});
-        break;
-      case 'currency':
-        this.setState({containerGroupFormState: {name, length, height, width, carrying, productList, comment, hiringPrice, currency: e.target.value}});
-        break;
+      case 'name': containerGroupFormState.name = e.target.value; break;
+      case 'length': containerGroupFormState.length = _getNumericValue(e.target.value); break;
+      case 'height': containerGroupFormState.height = _getNumericValue(e.target.value); break;
+      case 'width': containerGroupFormState.width = _getNumericValue(e.target.value); break;
+      case 'carrying': containerGroupFormState.carrying = _getNumericValue(e.target.value); break;
+      case 'comment': containerGroupFormState.comment = e.target.value; break;
+      case 'hiringPrice': containerGroupFormState.hiringPrice = _getNumericValue(e.target.value); break;
+      case 'currency': containerGroupFormState.currency = e.target.value; break;
       case 'clearForm':
-        this.setState({containerGroupFormState: {name: '', length: '', height: '', width: '', carrying:'', productList:[], comment:'', hiringPrice:'', currency: ''}});
-        //console.log(`Attantion! The productList cleared in main state.`);
+        let _getObjAfterSettingValueToFields = (obj, value, fieldsArr) => {
+          for (let fieldName in obj) {
+            fieldsArr.map((e, i, a) => {
+              if (fieldName===e) { obj[fieldsArr[i]] = value }
+            });
+          }
+          return obj;
+        }
+        containerGroupFormState = _getObjAfterSettingValueToFields(containerGroupFormState, '', ['name', 'length', 'height', 'width', 'carrying', 'comment', 'hiringPrice', 'currency']);
+        containerGroupFormState = _getObjAfterSettingValueToFields(containerGroupFormState, [], ['productList'])
         break;
       default: break;
     }
+    this.setState({ containerGroupFormState });
   }
   editContainerGroup(id, productList) {
     this.addContainerGroupFormToggler(true);

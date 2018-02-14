@@ -36,12 +36,12 @@ class Cargo extends Component {
       return newUUID;
     };
 
-    if(obj.name===`` || obj.length===`` || obj.width===`` || obj.height===`` || obj.weight===`` || obj.addSize===``){
+    if(!obj.name || !obj.length || !obj.width || !obj.height || !obj.weight || !obj.addSize){
       show({ text: 'Some inputs are required! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
     }else{
       // --- Need to check that will the product fit in a container. If it is true then continue, else return.
-      // First of all we have to detect max dimentions of the Container and max weight that it can to accept.
+      // First of all we have to detect max dimensions of the Container and max weight that it can to accept.
       let maxLength = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).length,
         maxWidth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).width,
         maxHeigth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).height,
