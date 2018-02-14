@@ -37,7 +37,7 @@ class ContainerGroupList extends Component {
     if(this.props.containerGroupList.length!==0){
       return (
         <div>
-          <h2>ContainerGroupList</h2>
+          <h3>ContainerGroupList</h3>
           {alerts}
         </div>
       );

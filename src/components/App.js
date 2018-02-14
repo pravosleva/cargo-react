@@ -114,10 +114,68 @@ class App extends Component {
       containerGroupFormState: {
         name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: '', hiringPrice: '', currency: ''
       },
-      containerGroupList: [],
-      containerGroupListSorted: [{ title: 'Chicken', children: [{ title: 'Egg' }] }],
+
+      //containerGroupList: [],
+      // TEST FOR EXAMPLE
+      containerGroupList: [
+        {
+          id: 'уникальный_айди_rrer',
+          name: 'Container Group 1',
+          carrying: 20000,
+          length: 13600,
+          width: 2400,
+          height: 3000,
+          hiringPrice: 7500,
+          currency: 'EUR',
+          productList: [
+            {
+              id: 'уникальный_айди_hdsfdfsffd',
+              name: 'PRODUCT 1',
+              length: 1000,
+              width: 1000,
+              height: 1000,
+              weight: 400,
+              comment: 'Кубик метр на метр на метр',
+              addSize: 50
+            },
+            {
+              id: 'уникальный_айди_jhjgjhg',
+              name: 'PRODUCT 2',
+              length: 1000,
+              width: 1000,
+              height: 1000,
+              weight: 400,
+              comment: 'Кубик метр на метр на метр',
+              addSize: 50
+            },
+            {
+              id: 'уникальный_айди_jhjgdjhg',
+              name: 'PRODUCT 3',
+              length: 2000,
+              width: 2000,
+              height: 2000,
+              weight: 900,
+              comment: 'Большой Кубик 2 x 2 x 2',
+              addSize: 50
+            },
+            {
+              id: 'уникальный_айди_jhjg1jhg',
+              name: 'PRODUCT 3',
+              length: 10500,
+              width: 2100,
+              height: 2500,
+              weight: 2500,
+              comment: 'Явно одна единица в машине!',
+              addSize: 50
+            }
+          ],
+          comment: 'Comment example mf'
+        }
+      ],
+
+      containerGroupListSorted_algorithm1: [{ title: 'Chicken', children: [{ title: 'Egg' }] }],
       /*
-        containerGroupListSorted as result of sotr to Containers by sizes and summary weight
+        containerGroupListSorted_algorithm1 as result of sotr to Containers by sizes and summary weight
         For example:
         [{ title: 'Chicken', children: [{ title: 'Egg' }] }]
       */
@@ -131,7 +189,7 @@ class App extends Component {
     this._getResultAsPOST = this._getResultAsPOST.bind(this);
     this._setContainerGroupListSorted = this._setContainerGroupListSorted.bind(this); // Special 2018-02-14
   }
-  _setContainerGroupListSorted () { this.setState ({ containerGroupListSorted: sortBySizes (this.state.containerGroupList) }) }
+  _setContainerGroupListSorted () { this.setState ({ containerGroupListSorted_algorithm1: sortBySizes (this.state.containerGroupList) }) }
   saveContainerGroup (obj) {
     let _getUUID = () => {
       let newUUID = ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -286,36 +344,51 @@ class App extends Component {
   }
   render() {
     return (
-      <div className='container'>
+      <div className='container-fluid'>
 
         <h1>Cargo-React</h1>
 
         <h2>Tree example</h2>
-        <div className='shadow'>
-          <TreeExample treeData={ this.state.containerGroupListSorted } setTreeData={ (treeData) => {this.setState({ containerGroupListSorted: treeData })} } />
-        </div>
-
-        <h2>Cargo</h2>
-        <div className='text-center' style={{marginBottom:'5px'}}>
-          <div className='btn-group' role='group'>
-              <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
-              <Button handlerClick={ this._setContainerGroupListSorted } iclassName='fa fa-cog' tmp={'Sort test'} />
-              <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cog' tmp={'POST test'} />
+        <div className='row'>
+          <div className='col-lg-6'>
+            <h3>Algorithm 1</h3>
+            <div className='shadow'>
+              <TreeExample
+                treeData={ this.state.containerGroupListSorted_algorithm1 }
+                setTreeData={ (treeData) => {this.setState({ containerGroupListSorted_algorithm1: treeData })} }
+              />
+            </div>
+          </div>
+          <div className='col-lg-6'>
+            <h3>Algorithm 2</h3>
+            <p>Under construction...</p>
           </div>
         </div>
 
-        <AddContainerGroupForm
-          addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
-          display={this.state.addContainerFormOpened ? 'block' : 'none'}
-          containerGroupFormState={this.state.containerGroupFormState}
-          updateContainerGroupFormState={this.updateContainerGroupFormState}
-          saveContainerGroup={this.saveContainerGroup} />
-        <ContainerGroupList
-          containerGroupList={this.state.containerGroupList}
-          removeContainerGroup={this.removeContainerGroup}
-          editContainerGroup={this.editContainerGroup}
-          updateProductListForContainerGroup={this._updateProductListForContainerGroup} />
+        <h2>Cargo</h2>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='text-center' style={{marginBottom:'5px'}}>
+              <div className='btn-group' role='group'>
+                  <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
+                  <Button handlerClick={ this._setContainerGroupListSorted } bsBtnClassName='btn-primary' iclassName='fa fa-cog' tmp={'Sort test'} />
+                  <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cog' tmp={'POST test'} />
+              </div>
+            </div>
 
+            <AddContainerGroupForm
+              addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
+              display={this.state.addContainerFormOpened ? 'block' : 'none'}
+              containerGroupFormState={this.state.containerGroupFormState}
+              updateContainerGroupFormState={this.updateContainerGroupFormState}
+              saveContainerGroup={this.saveContainerGroup} />
+            <ContainerGroupList
+              containerGroupList={this.state.containerGroupList}
+              removeContainerGroup={this.removeContainerGroup}
+              editContainerGroup={this.editContainerGroup}
+              updateProductListForContainerGroup={this._updateProductListForContainerGroup} />
+          </div>
+        </div>
       </div>
     );
   }
