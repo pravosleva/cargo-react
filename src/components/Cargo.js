@@ -16,7 +16,7 @@ class Cargo extends Component {
     this.state = {
       addProductFormOpened: false,
       productFormState: { name: '', length: '', width: '', height: '', weight: '', comment: '', addSize: '' },
-      
+
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
     this.saveProduct = this.saveProduct.bind(this);
@@ -37,10 +37,10 @@ class Cargo extends Component {
       return newUUID;
     };
 
-    if(!obj.name || !obj.length || !obj.width || !obj.height || !obj.weight || !obj.addSize){
-      show({ text: 'Some inputs are required! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 5000 });
+    if (!obj.name || !obj.length || !obj.width || !obj.height || !obj.weight || !obj.addSize) {
+      show({ text: 'Some input fields could not be empty! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 5000 });
       return;
-    }else{
+    } else {
       // --- Need to check that will the product fit in a container. If it is true then continue, else return.
       // First of all we have to detect max dimensions of the Container and max weight that it can to accept.
       let maxLength = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).length,
@@ -49,19 +49,19 @@ class Cargo extends Component {
         maxWeigth = this.props.containerGroupList.find(function(e){return e.id===this.props.containerId}, this).carrying;
       // Then we have to check the product parameters before add it to productList:
       let conditional_length, conditional_width;
-      if(obj.length > obj.width){
+      if (obj.length > obj.width) {
         conditional_length = (obj.length + obj.addSize);
         conditional_width = (obj.width + obj.addSize);
-      }else{
+      } else {
         conditional_length = (obj.width + obj.addSize);
         conditional_width = (obj.length + obj.addSize);
       }
       let flag = true, err_msg = '';
-      if(conditional_length > maxLength){ err_msg = `The most cond. dimention (with addSize = ${obj.addSize} mm) is more than maxLength: ${conditional_length} > ${maxLength} mm! Check it please.`; flag = false; }
-      if(conditional_width > maxWidth){ err_msg = `The smallest cond. dimention (with addSize = ${obj.addSize} mm) is more than maxWidth: ${conditional_width} > ${maxWidth} mm! Check it please.`; flag = false; }
-      if(obj.height > maxHeigth){ err_msg = `Height is more than maxHeigth: ${obj.height} > ${maxHeigth} mm! Check it please.`; flag = false; }
-      if(obj.weight > maxWeigth){ err_msg = `Weight is more than maxWeigth: ${obj.weight} > ${maxWeigth} kg! Check it please.`; flag = false; }
-      if(flag===false){
+      if (conditional_length > maxLength) { err_msg = `The biggest cond. dimension (with addSize= ${obj.addSize} mm) is more than limit! ${conditional_length} > ${maxLength} mm! Check it please`; flag = false; }
+      if (conditional_width > maxWidth) { err_msg = `The smallest cond. dimension (with addSize= ${obj.addSize} mm) is more than limit! ${conditional_width} > ${maxWidth} mm! Check it please`; flag = false; }
+      if (obj.height > maxHeigth) { err_msg = `Height is more than limit! ${obj.height} > ${maxHeigth} mm! Check it please`; flag = false; }
+      if (obj.weight > maxWeigth) { err_msg = `Weight is more than limit! ${obj.weight} > ${maxWeigth} kg! Check it please`; flag = false; }
+      if (flag===false) {
         show({ text: err_msg, pos: 'bottom-right', customClass: 'snackbar-danger', duration: 20000 }); return;
       }
       // --- Checked.
@@ -93,22 +93,22 @@ class Cargo extends Component {
     switch(propName){
       case 'name': this.setState({productFormState: {name: e.target.value, length, width, height, weight, comment, addSize}}); break;
       case 'length':
-        if(!isNaN(e.target.value)){
+        if (!isNaN(e.target.value)) {
           this.setState({productFormState: {name, length: _getNumericValue(e.target.value), width, height, weight, comment, addSize}});
         }else{};
         break;
       case 'width':
-        if(!isNaN(e.target.value)){
+        if (!isNaN(e.target.value)) {
           this.setState({productFormState: {name, length, width: _getNumericValue(e.target.value), height, weight, comment, addSize}});
         }else{};
         break;
       case 'height':
-        if(!isNaN(e.target.value)){
+        if (!isNaN(e.target.value)) {
           this.setState({productFormState: {name, length, width, height: _getNumericValue(e.target.value), weight, comment, addSize}});
         }else{};
         break;
       case 'weight':
-        if(!isNaN(e.target.value)){
+        if (!isNaN(e.target.value)) {
           this.setState({productFormState: {name, length, width, height, weight: _getNumericValue(e.target.value), comment, addSize}});
         }else{};
         break;

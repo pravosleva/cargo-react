@@ -54,8 +54,8 @@ class AddProductForm extends Component {
         <div className='panel-footer'>
           <div className='text-right'>
             <div className='btn-group' role='group'>
-              <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='[ Save Product ]' bsBtnClassName={`btn-primary`}></Button>
-              <Button handlerClick={this.props.addProductFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} bsBtnClassName={`btn-danger`} />
+              <Button handlerClick={this.saveProduct} iclassName='fa fa-plus' tmp='Save Product' bsBtnClassName={`btn-primary`}></Button>
+              <Button handlerClick={this.props.addProductFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'Close Form'} bsBtnClassName={`btn-danger`} />
             </div>
           </div>
         </div>

@@ -91,8 +91,8 @@ class AddContainerGroupForm extends Component {
           <div className='panel-footer'>
             <div className='text-right'>
               <div className='btn-group' role='group'>
-                <Button handlerClick={this.saveContainerGroup.bind(this)} iclassName='fa fa-plus' tmp='[ Save Container ]' bsBtnClassName={`btn-primary`} ></Button>
-                <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'[ Close Form ]'} bsBtnClassName={`btn-danger`} />
+                <Button handlerClick={this.saveContainerGroup.bind(this)} iclassName='fa fa-plus' tmp='Save Container' bsBtnClassName={`btn-primary`} ></Button>
+                <Button handlerClick={this.props.addContainerGroupFormToggler.bind(this, false)} iclassName='fa fa-chevron-up' tmp={'Close Form'} bsBtnClassName={`btn-danger`} />
               </div>
             </div>
           </div>

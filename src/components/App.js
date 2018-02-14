@@ -15,6 +15,9 @@ import '../css/snackbar-custom.css';
 import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css'; // This only needs to be imported once in your app
 
+import sortBySizes from './_auxiliary';
+//console.log(sortBySizes());
+
 show({
   text: 'Last update at 2018-02-14',
   pos: 'bottom-right',
@@ -26,7 +29,7 @@ show({
   onActionClick: (element) => {
     console.log('hello world by snackbar action');
 
-    let x = window.open(`mailto:selection4test@gmail.com?subject=About%20Cargo`);
+    let x = window.open(`mailto:selection4test@gmail.com?subject=Feedback%20about%20Cargo-React%20project`);
     x.close();
     element.style.opacity = 0;
   }
@@ -93,7 +96,7 @@ class TreeExample extends Component {
 
   render() {
     return (
-      <div style={{ height: 400 }}>
+      <div style={{ height: 400, overflowY: 'auto' }}>
         <SortableTree
           treeData={this.props.treeData}
           onChange={treeData => this.props.setTreeData(treeData)}
@@ -126,8 +129,10 @@ class App extends Component {
     this.addContainerGroupFormToggler = this.addContainerGroupFormToggler.bind(this);
     this._updateProductListForContainerGroup = this._updateProductListForContainerGroup.bind(this);
     this._getResultAsPOST = this._getResultAsPOST.bind(this);
+    this._setContainerGroupListSorted = this._setContainerGroupListSorted.bind(this); // Special 2018-02-14
   }
-  saveContainerGroup(obj) {
+  _setContainerGroupListSorted () { this.setState ({ containerGroupListSorted: sortBySizes (this.state.containerGroupList) }) }
+  saveContainerGroup (obj) {
     let _getUUID = () => {
       let newUUID = ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         let r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
@@ -137,7 +142,7 @@ class App extends Component {
     };
 
     if(!obj.name || !obj.length || !obj.width || !obj.height || !obj.carrying || !obj.hiringPrice || !obj.currency){
-      show({ text: 'Some inputs are required! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 10000 });
+      show({ text: 'Some input fields could not be empty! Please, check the input form', pos: 'bottom-right', customClass: 'snackbar-danger', duration: 10000 });
       return;
     }
 
@@ -172,7 +177,7 @@ class App extends Component {
         show({ text: err_msg, pos: 'bottom-right', customClass: 'snackbar-danger', duration: 20000 });
         return;
       }else{
-        show({ text: `Dimentions are tested. It's Ok.`, pos: 'bottom-right', customClass: 'snackbar-primary', duration: 10000 });
+        show({ text: `Dimensions tested= It's Ok`, pos: 'bottom-right', customClass: 'snackbar-primary', duration: 10000 });
       }
     }
     // --- Checked and Tested.
@@ -230,7 +235,9 @@ class App extends Component {
   editContainerGroup(id, productList) {
     this.addContainerGroupFormToggler(true);
     let containerGroupToEdit = this.state.containerGroupList.filter( (e, i) => e.id === id )[0];
-    this.setState({ containerGroupFormState: {name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width, carrying: containerGroupToEdit.carrying, productList: productList, comment: containerGroupToEdit.comment, hiringPrice: containerGroupToEdit.hiringPrice, currency: containerGroupToEdit.currency} });
+    this.setState({ containerGroupFormState: {
+      name: containerGroupToEdit.name, length: containerGroupToEdit.length, height: containerGroupToEdit.height, width: containerGroupToEdit.width, carrying: containerGroupToEdit.carrying, productList, comment: containerGroupToEdit.comment, hiringPrice: containerGroupToEdit.hiringPrice, currency: containerGroupToEdit.currency
+    } });
     this.removeContainerGroup(id);
   }
   componentDidUpdate() {
@@ -273,7 +280,9 @@ class App extends Component {
     .catch(function(err){
       console.error(err);
     });
-    console.log('POST should be here...');
+
+    console.warn('POST req is under construction yet...');
+
   }
   render() {
     return (
@@ -290,7 +299,8 @@ class App extends Component {
         <div className='text-center' style={{marginBottom:'5px'}}>
           <div className='btn-group' role='group'>
               <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
-              <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cogs' tmp={'POST test'} />
+              <Button handlerClick={ this._setContainerGroupListSorted } iclassName='fa fa-cog' tmp={'Sort test'} />
+              <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cog' tmp={'POST test'} />
           </div>
         </div>
 

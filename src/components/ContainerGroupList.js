@@ -18,7 +18,7 @@ class ContainerGroupList extends Component {
             </div>
 
             <strong>Container Group name: {!e.name?`_`:e.name}</strong><br />
-            Dimentions of one unit: {!e.length?`_`:e.length} x {!e.width?`_`:e.width} x {!e.height?`_`:e.height} mm<br />
+            Dimensions of one unit: {!e.length?`_`:e.length} x {!e.width?`_`:e.width} x {!e.height?`_`:e.height} mm<br />
             Carrying of one unit: {!e.carrying?`_`:e.carrying} kg<br />
             Hiring Price of one unit: {!e.hiringPrice?`_`:e.hiringPrice} {e.currency}<br />
             {e.comment?<span className='text-muted'>Comment: {e.comment}</span>:null}
