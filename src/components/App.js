@@ -255,8 +255,8 @@ class App extends Component {
         <h1>Cargo-React</h1>
         <div className='text-center' style={{marginBottom:'5px'}}>
           <div className='btn-group' role='group'>
-            <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Container ]'} />
-            <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cogs' tmp={'[ POST to get the result ]'} />
+            <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
+            <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cogs' tmp={'POST test'} />
         </div>
       </div>
 
