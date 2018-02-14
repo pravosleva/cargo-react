@@ -13,6 +13,11 @@
 
 _Under construction yet..._
 
+## Demo
+
+![Demo gif](./_img/test-0.gif)
+[Link to Life Demo](http://selection4test.ru/projects/cargo-react)
+
 ## Tasklist (4 of 9 are completed)
 
 - [x] **Container Group parameters should be entered as required parameters** (length x width x height, carrying, hiringPrice, currency)
@@ -72,10 +77,6 @@ Result can be returned as:
 - [ ] **Additional web-page for 3D model render.**
 
 _Under construction yet..._
-
-## Demo
-
-[Link](http://selection4test.ru/projects/cargo-react)
 
 # Original ReadMe
 
