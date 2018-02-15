@@ -36,7 +36,7 @@ export default function sortBySizes (arg_containerGroupList) {
 
   let result_containerGroupList = [];
   /*
-    for example: [
+    result should be like this: [
         { title: 'ContainerGroup 1',
           children: [
             { title: 'Container 1',
@@ -44,7 +44,7 @@ export default function sortBySizes (arg_containerGroupList) {
   */
 
   arg_containerGroupList.map((cg, cgi, cga) => { // для каждой группы контейнеров...
-    // ...создаем первую структурную ед. (группу) с первым контейнером с первым левлом
+    // ...создаем первую структурную ед. (группу) с первым контейнером с первым левлом.
     let containerGroup = new ContainerGroup({ title: cg.name });
     let container = new Container({ title: `Container as ${cg.name} unit`, carrying: cg.carrying, length: cg.length, width: cg.width, height: cg.height });
     let level = new Level_algorithm1({ widthLimit: cg.width, title: 'Level' });
@@ -53,7 +53,7 @@ export default function sortBySizes (arg_containerGroupList) {
     containerGroup.children.push(container);
 
     // -
-    // need to add products to container one by one...
+    // нужно распределить продукты по контейнерам один за другим...
 
     cg.productList.map((pr, pri, pra) => { // ...для каждого продукта в данной группе контейнеров...
       container.children.map((l, li, la) => { // ...каждый продукт пытаемся поместить в каждый элемент массива container.children...
@@ -66,6 +66,7 @@ export default function sortBySizes (arg_containerGroupList) {
 
     // -
 
+    // ...добавляем структурную единицу в результат.
     result_containerGroupList.push(containerGroup);
   });
 

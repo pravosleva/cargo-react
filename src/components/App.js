@@ -14,6 +14,7 @@ import '../css/snackbar-custom.css';
 
 import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css'; // This only needs to be imported once in your app
+// https://github.com/fritz-c/react-sortable-tree
 
 import sortBySizes from './_auxiliary';
 //console.log(sortBySizes());
@@ -100,6 +101,7 @@ class TreeExample extends Component {
         <SortableTree
           treeData={this.props.treeData}
           onChange={treeData => this.props.setTreeData(treeData)}
+          canDrag={false}
         />
       </div>
     );
