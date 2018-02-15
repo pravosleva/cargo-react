@@ -160,7 +160,7 @@ class App extends Component {
             },
             {
               id: 'уникальный_айди_jhjg1jhg',
-              name: 'PRODUCT 3',
+              name: 'PRODUCT 4',
               length: 10500,
               width: 2100,
               height: 2500,
