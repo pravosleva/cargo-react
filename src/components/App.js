@@ -166,7 +166,7 @@ class App extends Component {
               length: 10500,
               width: 2100,
               height: 2500,
-              weight: 2500,
+              weight: 19900,
               comment: 'Явно одна единица в машине!',
               addSize: 50
             }
@@ -175,9 +175,9 @@ class App extends Component {
         }
       ],
 
-      containerGroupListSorted_algorithm1: [{ title: 'Chicken', children: [{ title: 'Egg' }] }],
+      containerGroupListSorted: [{ title: 'Chicken', children: [{ title: 'Egg' }] }],
       /*
-        containerGroupListSorted_algorithm1 as result of sotr to Containers by sizes and summary weight
+        containerGroupListSorted as result of sotr to Containers by sizes and summary weight
         For example:
         [{ title: 'Chicken', children: [{ title: 'Egg' }] }]
       */
@@ -191,7 +191,7 @@ class App extends Component {
     this._getResultAsPOST = this._getResultAsPOST.bind(this);
     this._setContainerGroupListSorted = this._setContainerGroupListSorted.bind(this); // Special 2018-02-14
   }
-  _setContainerGroupListSorted () { this.setState ({ containerGroupListSorted_algorithm1: sortBySizes (this.state.containerGroupList) }) }
+  _setContainerGroupListSorted () { this.setState ({ containerGroupListSorted: sortBySizes (this.state.containerGroupList) }) }
   saveContainerGroup (obj) {
     let _getUUID = () => {
       let newUUID = ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -353,16 +353,16 @@ class App extends Component {
         <h2>Tree example</h2>
         <div className='row'>
           <div className='col-lg-6'>
-            <h3>Algorithm 1</h3>
+            <h3>Structure</h3>
             <div className='shadow'>
               <TreeExample
-                treeData={ this.state.containerGroupListSorted_algorithm1 }
-                setTreeData={ (treeData) => {this.setState({ containerGroupListSorted_algorithm1: treeData })} }
+                treeData={ this.state.containerGroupListSorted }
+                setTreeData={ (treeData) => {this.setState({ containerGroupListSorted: treeData })} }
               />
             </div>
           </div>
           <div className='col-lg-6'>
-            <h3>Algorithm 2</h3>
+            <h3>Somethind else</h3>
             <p>Under construction...</p>
           </div>
         </div>
