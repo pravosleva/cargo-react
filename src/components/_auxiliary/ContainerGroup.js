@@ -16,7 +16,7 @@ export default class ContainerGroup {
   }
 
   setTitle () {
-    this.title = `${this.name} (${this.children.length} containers)`;
+    this.title = `${this.name} (${this.children.length} conts)`;
   }
 
 }

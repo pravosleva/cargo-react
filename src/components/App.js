@@ -97,7 +97,7 @@ class TreeExample extends Component {
 
   render() {
     return (
-      <div style={{ height: 400, overflowY: 'auto' }}>
+      <div style={{ height: "500px", overflowY: 'auto' }}>
         <SortableTree
           treeData={this.props.treeData}
           onChange={treeData => this.props.setTreeData(treeData)}
@@ -117,12 +117,35 @@ class App extends Component {
         name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: '', hiringPrice: '', currency: ''
       },
 
-      //containerGroupList: [],
-      // TEST FOR EXAMPLE
       containerGroupList: [
         {
+          id: 'уникальный_айди_конт_0',
+          name: 'Truck 13.6 m',
+          carrying: 20000,
+          length: 13600,
+          width: 2400,
+          height: 3000,
+          hiringPrice: 7500,
+          currency: 'EUR',
+          productList: [],
+        },
+        {
+          id: 'уникальный_айди_конт_1',
+          name: 'Truck 2x 7.5 m',
+          carrying: 20000,
+          length: 15000,
+          width: 2400,
+          height: 3000,
+          hiringPrice: 7500,
+          currency: 'EUR',
+          productList: [],
+        },
+      ],
+      // TEST FOR EXAMPLE
+      /*containerGroupList: [
+        {
           id: 'уникальный_айди_rrer',
-          name: 'Container Group 1',
+          name: 'Group 1',
           carrying: 20000,
           length: 13600,
           width: 2400,
@@ -133,7 +156,7 @@ class App extends Component {
             {
               id: 'уникальный_айди_hdsfdfsffd',
               name: 'PRODUCT 1',
-              length: 1000,
+              length: 1200,
               width: 1000,
               height: 1000,
               weight: 400,
@@ -144,7 +167,7 @@ class App extends Component {
               id: 'уникальный_айди_jhjgjhg',
               name: 'PRODUCT 2',
               length: 1000,
-              width: 1000,
+              width: 1100,
               height: 1000,
               weight: 400,
               comment: 'Кубик метр на метр на метр',
@@ -153,6 +176,16 @@ class App extends Component {
             {
               id: 'уникальный_айди_jhjgdjhg',
               name: 'PRODUCT 3',
+              length: 2000,
+              width: 2000,
+              height: 2000,
+              weight: 900,
+              comment: 'Большой Кубик 2 x 2 x 2',
+              addSize: 50
+            },
+            {
+              id: 'уникальный_айди_jhjgdjhg',
+              name: 'PRODUCT 3.1',
               length: 2000,
               width: 2000,
               height: 2000,
@@ -174,8 +207,11 @@ class App extends Component {
           comment: 'Comment example mf'
         }
       ],
+      */
 
-      containerGroupListSorted: [{ title: 'Chicken', children: [{ title: 'Egg' }] }],
+      containerGroupListSorted: [],
+      // TEST FOR EXAMPLE
+      //containerGroupListSorted: [{ title: 'Chicken', children: [{ title: 'Egg' }] }],
       /*
         containerGroupListSorted as result of sotr to Containers by sizes and summary weight
         For example:
@@ -346,13 +382,15 @@ class App extends Component {
   }
   render() {
     return (
-      <div className='container-fluid'>
+      <div className='container-fluid' style={{marginBottom:'50px'}}>
 
         <h1>Cargo-React</h1>
-
-        <h2>Tree example</h2>
         <div className='row'>
           <div className='col-lg-6'>
+
+            <h2>Tree example</h2>
+            <div style={{height:'33px'}}></div>
+
             <h3>Structure</h3>
             <div className='shadow'>
               <TreeExample
@@ -361,34 +399,30 @@ class App extends Component {
               />
             </div>
           </div>
+
           <div className='col-lg-6'>
-            <h3>Somethind else</h3>
-            <p>Under construction...</p>
-          </div>
-        </div>
+            <h2>Cargo</h2>
 
-        <h2>Cargo</h2>
-        <div className='row'>
-          <div className='col-lg-12'>
-            <div className='text-center' style={{marginBottom:'5px'}}>
-              <div className='btn-group' role='group'>
-                  <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
-                  <Button handlerClick={ this._setContainerGroupListSorted } bsBtnClassName='btn-primary' iclassName='fa fa-cog' tmp={'Sort test'} />
-                  <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cog' tmp={'POST test'} />
-              </div>
-            </div>
 
-            <AddContainerGroupForm
-              addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
-              display={this.state.addContainerFormOpened ? 'block' : 'none'}
-              containerGroupFormState={this.state.containerGroupFormState}
-              updateContainerGroupFormState={this.updateContainerGroupFormState}
-              saveContainerGroup={this.saveContainerGroup} />
-            <ContainerGroupList
-              containerGroupList={this.state.containerGroupList}
-              removeContainerGroup={this.removeContainerGroup}
-              editContainerGroup={this.editContainerGroup}
-              updateProductListForContainerGroup={this._updateProductListForContainerGroup} />
+                <div className='text-center' style={{marginBottom:'5px'}}>
+                  <div className='btn-group' role='group'>
+                      <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
+                      <Button handlerClick={ this._setContainerGroupListSorted } bsBtnClassName='btn-primary' iclassName='fa fa-cog' tmp={'Sort test'} />
+                      <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cog' tmp={'POST test'} />
+                  </div>
+                </div>
+
+                <AddContainerGroupForm
+                  addContainerGroupFormToggler={this.addContainerGroupFormToggler.bind(this)}
+                  display={this.state.addContainerFormOpened ? 'block' : 'none'}
+                  containerGroupFormState={this.state.containerGroupFormState}
+                  updateContainerGroupFormState={this.updateContainerGroupFormState}
+                  saveContainerGroup={this.saveContainerGroup} />
+                <ContainerGroupList
+                  containerGroupList={this.state.containerGroupList}
+                  removeContainerGroup={this.removeContainerGroup}
+                  editContainerGroup={this.editContainerGroup}
+                  updateProductListForContainerGroup={this._updateProductListForContainerGroup} />
           </div>
         </div>
       </div>
