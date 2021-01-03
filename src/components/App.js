@@ -226,6 +226,7 @@ class App extends Component {
     this._updateProductListForContainerGroup = this._updateProductListForContainerGroup.bind(this);
     this._getResultAsPOST = this._getResultAsPOST.bind(this);
     this._setContainerGroupListSorted = this._setContainerGroupListSorted.bind(this); // Special 2018-02-14
+    this.getProductList = this.getProductList.bind(this)
   }
   _setContainerGroupListSorted () { this.setState ({ containerGroupListSorted: sortBySizes (this.state.containerGroupList) }) }
   saveContainerGroup (obj) {
@@ -365,7 +366,7 @@ class App extends Component {
     let containerGroupList = this.state.containerGroupList;
     axios({
       method: 'post',
-      url: 'http://selection4test.ru/projects/cargo-3d/retail',
+      url: 'https://selection4test.ru/projects/cargo-3d/retail',
       data: {
         'containerGroupList': containerGroupList
       }
@@ -378,7 +379,32 @@ class App extends Component {
     });
 
     console.warn('POST req is under construction yet...');
+  }
+  getProductList(containerGroupId) {
+    const targetContainerGroup = this.state.containerGroupList.find(({ id }) => id === containerGroupId)
 
+    if (!!targetContainerGroup) {
+      return targetContainerGroup.productList
+    }
+    return null
+  }
+  perm = (xs) => {
+    let ret=[];
+    for(let i=0;i<xs.length;i=i+1){
+      let rest=this.perm(xs.slice(0,i).concat(xs.slice(i+1)));
+      if(!rest.length){
+        ret.push([xs[i]])
+      } else {
+        for(let j=0;j<rest.length;j=j+1){
+          ret.push([xs[i]].concat(rest[j]))
+        }
+      }
+    }
+    return ret
+  };
+  getProductListCombinations = (containerGroupId) => {
+    // console.log(containerGroupId)
+    return this.perm(this.getProductList(containerGroupId) || [])
   }
   render() {
     return (
@@ -422,7 +448,9 @@ class App extends Component {
                   containerGroupList={this.state.containerGroupList}
                   removeContainerGroup={this.removeContainerGroup}
                   editContainerGroup={this.editContainerGroup}
-                  updateProductListForContainerGroup={this._updateProductListForContainerGroup} />
+                  updateProductListForContainerGroup={this._updateProductListForContainerGroup}
+                  getProductListCombinations={this.getProductListCombinations}
+                />
           </div>
         </div>
       </div>
