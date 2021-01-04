@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Button from './Button';
 //css..
 import Cargo from './Cargo';
-import buildUrl from 'build-url'
+import buildUrl from 'build-url';
+import { show, ACTION_TYPE } from 'js-snackbar';
+import { openNewTab } from '../utils/openNewTab'
 
 function utf8_to_b64(str) {
   return window.btoa(unescape(encodeURIComponent(str)));
@@ -53,6 +55,16 @@ class ContainerGroupList extends Component {
   logLinks = async (containerGroupData) => {
     const { productList, id } = containerGroupData
     const combs = this.props.getProductListCombinations(id)
+    if (combs.length === 0) {
+      show({
+        text: 'Добавьте элементы в контейнер.',
+        pos: 'bottom-right',
+        customClass: 'snackbar-danger',
+        duration: 5000,
+        // actionType: ACTION_TYPE.TEXT,
+      });
+      return;
+    }
     const _result = []
     const promiseList = []
 
@@ -82,12 +94,28 @@ class ContainerGroupList extends Component {
       })
 
     result.forEach((final, i) => {
-      console.group(`final ${i}: ${final.res.totalX}`)
-      console.log(final)
-      // console.dir(result[i].apiUrl)
-      // console.dir(_result[i].threejsLink)
-      console.groupEnd(`final ${i}: ${final.res.totalX}`)
+      const title = `final ${i}: totalX= ${final.res.totalX} m`
+      console.group(title)
+      // console.dir(final)
+      console.dir(final.apiUrl)
+      console.dir(final.threejsLink)
+      console.groupEnd(title)
     })
+
+    show({
+      text: `Минимальная заполненность в погонных метрах: ${result[0].res.totalX}`,
+      pos: 'bottom-right',
+      customClass: 'snackbar-primary',
+      duration: 35000,
+      actionType: ACTION_TYPE.TEXT,
+      onSnackbarClick: () => {
+        const isGonnaBeRedirected = window.confirm('Показать 3D модель?')
+
+        if (isGonnaBeRedirected) {
+          openNewTab(result[0].threejsLink)
+        }
+      },
+    });
   }
   render() {
     let alerts = this.props.containerGroupList.map(
@@ -95,8 +123,8 @@ class ContainerGroupList extends Component {
             <div style={{position:'relative'}}>
               <div className='btn-group' role='group' style={{position:'absolute', top:'5px', right:'5px'}}>
                 <Button iclassName='fa fa-pencil' handlerClick={this.props.editContainerGroup.bind(this, e.id, e.productList)} />
-                <Button iclassName='fa fa-info' bsBtnClassName='btn-default' handlerClick={this.logLinks.bind(this, e)} />
-                <Button iclassName='fa fa-close' bsBtnClassName='btn-danger' handlerClick={this.props.removeContainerGroup.bind(this, e.id)} />
+                <Button iclassName='fa fa-info' bsBtnClassName='btn-default btn-primary-text' handlerClick={this.logLinks.bind(this, e)} />
+                <Button iclassName='fa fa-close' bsBtnClassName='btn-default btn-danger-text' handlerClick={this.props.removeContainerGroup.bind(this, e.id, true)} />
               </div>
             </div>
 

@@ -75,11 +75,23 @@ class Cargo extends Component {
       this._updateProductListForContainerGroup(productList);
     }
   }
-  removeProduct(id) {
-    let productList = this.props.productList.filter( (e, i) => e.id !== id );
-    this.setState({ productList });
+  removeProduct(id, shouldBeConfirmed) {
+    let isGonnaBeRemoved = false
+    const doIt = () => {
+      const newProductList = this.props.productList.filter( (e, i) => e.id !== id )
+      this.setState({ productList: newProductList });
 
-    this._updateProductListForContainerGroup(productList);
+      this._updateProductListForContainerGroup(newProductList);
+    }
+
+    if (shouldBeConfirmed) {
+      isGonnaBeRemoved = window.confirm('Вы уверены?')
+
+      if (isGonnaBeRemoved) doIt();
+      return;
+    } else {
+      doIt();
+    }
   }
   updateProductFormState(propName, e) { // SHOULD BE REFACTORED!
     let name = this.state.productFormState.name,
@@ -141,7 +153,7 @@ class Cargo extends Component {
         <span>ProductList for the Container Group.</span>
 
         <div className='text-center' style={{marginBottom:'5px'}}>
-          <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'[ Add Product ]'} />
+          <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp='Add Product' />
         </div>
 
         <AddProductForm

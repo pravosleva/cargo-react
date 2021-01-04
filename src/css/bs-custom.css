@@ -1,6 +1,7 @@
 .panel, .well {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  /*box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); */
+  /* box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
 }
 .panel > .panel-body {
   margin-left: 30px;
@@ -26,3 +27,16 @@
   border: 0;
 }
 .dropdown-item:hover { background-color: lightgray }
+
+.btn-group {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.10);
+}
+.btn > i + span {
+  margin-left: 5px;
+}
+.btn-danger-text {
+  color: #d9534f;
+}
+.btn-primary-text {
+  color: #337ab7;
+}

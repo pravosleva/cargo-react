@@ -129,17 +129,6 @@ class App extends Component {
           currency: 'EUR',
           productList: [],
         },
-        {
-          id: 'уникальный_айди_конт_1',
-          name: 'Truck 2x 7.5 m',
-          carrying: 20000,
-          length: 15000,
-          width: 2400,
-          height: 3000,
-          hiringPrice: 7500,
-          currency: 'EUR',
-          productList: [],
-        },
       ],
       // TEST FOR EXAMPLE
       /*containerGroupList: [
@@ -296,9 +285,18 @@ class App extends Component {
     this.addContainerGroupFormToggler(false);
     //show({ text: `It's Ok. Container Group saved as ${obj.name}...`, pos: 'bottom-right', customClass: 'snackbar-primary', duration: 10000 });
   }
-  removeContainerGroup(id) {
-    let containerGroupList = this.state.containerGroupList.filter( (e, i) => e.id !== id );
-    this.setState({ containerGroupList });
+  removeContainerGroup(id, shouldBeConfirmed) {
+    let isGonnaBeRemoved = false
+
+    if (shouldBeConfirmed) {
+      isGonnaBeRemoved = window.confirm('Вы уверены?')
+
+      if (isGonnaBeRemoved) {
+        this.setState(({ containerGroupList: prevContainerGroupList }) => ({ containerGroupList: prevContainerGroupList.filter( (e, i) => e.id !== id ) }));
+      }
+    } else {
+      this.setState(({ containerGroupList: prevContainerGroupList }) => ({ containerGroupList: prevContainerGroupList.filter( (e, i) => e.id !== id ) }));
+    }
   }
   updateContainerGroupFormState(propName, productList, e) {
     //console.log(`e.target.value before: ${e.target.value}`);
@@ -434,7 +432,7 @@ class App extends Component {
                   <div className='btn-group' role='group'>
                       <Button handlerClick={ this.addContainerGroupFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp={'Add Container Group'} />
                       <Button handlerClick={ this._setContainerGroupListSorted } bsBtnClassName='btn-primary' iclassName='fa fa-cog' tmp={'Sort test'} />
-                      <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cog' tmp={'POST test'} />
+                      {/* <Button handlerClick={ this._getResultAsPOST } iclassName='fa fa-cog' tmp={'POST test'} /> */}
                   </div>
                 </div>
 
