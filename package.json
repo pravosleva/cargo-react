@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.21.1",
     "build-url": "^6.0.1",
     "font-awesome": "^4.7.0",
     "js-snackbar": "^0.3.1",
