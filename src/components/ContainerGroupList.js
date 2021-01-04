@@ -15,7 +15,7 @@ class ContainerGroupList extends Component {
   logProductListCombinations = (containerGroupId) => {
     console.log(this.props.getProductListCombinations(containerGroupId))
   }
-  getLink = (containerGroupData) => {
+  getUrl = (containerGroupData, baseUrl = 'https://selection4test.ru', path = '/projects/cargo-3d-2021') => {
     const {
       productList,
       id,
@@ -24,8 +24,8 @@ class ContainerGroupList extends Component {
       length,
       height,
     } = containerGroupData
-    return buildUrl('https://selection4test.ru', {
-      path: '/projects/cargo-3d-2021',
+    return buildUrl(baseUrl, {
+      path,
       queryParams: {
         wagonLength: length,
         wagonWidth: width,
@@ -43,12 +43,50 @@ class ContainerGroupList extends Component {
       },
     })
   }
-  logLinks = (containerGroupData) => {
+  promise = async (apiUrl) => {
+    return fetch(apiUrl)
+      .then((res) => res.json())
+      .catch((err) => {
+        throw new Error(err)
+      })
+  }
+  logLinks = async (containerGroupData) => {
     const { productList, id } = containerGroupData
     const combs = this.props.getProductListCombinations(id)
+    const _result = []
+    const promiseList = []
 
-    combs.forEach((comb) => {
-      console.log(this.getLink({ ...containerGroupData, productList: comb }))
+    combs.forEach((comb, i) => {
+      const threejsLink = this.getUrl({ ...containerGroupData, productList: comb })
+      const apiUrl = this.getUrl({ ...containerGroupData, productList: comb }, 'https://selection4test.ru', '/projects/cargo-2021/get-running-meters-in-wagon')
+      // console.group(`comb ${i}`)
+      // console.dir(apiUrl)
+      // console.dir(threejsLink)
+      // console.groupEnd(`comb ${i}`)
+      _result.push({ threejsLink, apiUrl })
+      promiseList.push(this.promise(apiUrl))
+    })
+
+    let result = []
+
+    await Promise.all(promiseList)
+      .then((resArr) => {
+        const _r = []
+        resArr.forEach((res, i) => {
+          _r.push({ res, apiUrl: _result[i].apiUrl, threejsLink: _result[i].threejsLink })
+        })
+        result = _r.sort((e1, e2) => e1.res.totalX - e2.res.totalX)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+    result.forEach((final, i) => {
+      console.group(`final ${i}: ${final.res.totalX}`)
+      console.log(final)
+      // console.dir(result[i].apiUrl)
+      // console.dir(_result[i].threejsLink)
+      console.groupEnd(`final ${i}: ${final.res.totalX}`)
     })
   }
   render() {
