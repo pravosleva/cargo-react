@@ -97,7 +97,7 @@ class TreeExample extends Component {
 
   render() {
     return (
-      <div style={{ height: "500px", overflowY: 'auto' }}>
+      <div style={{ height: this.props.treeData.length > 0 ? "500px" : "70px", overflowY: 'auto' }}>
         <SortableTree
           treeData={this.props.treeData}
           onChange={treeData => this.props.setTreeData(treeData)}
@@ -112,6 +112,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      isCalculating: false,
       addContainerFormOpened: props.defaultAddContainerGroupFormOpened,
       containerGroupFormState: {
         name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: '', hiringPrice: '', currency: ''
@@ -216,6 +217,12 @@ class App extends Component {
     this._getResultAsPOST = this._getResultAsPOST.bind(this);
     this._setContainerGroupListSorted = this._setContainerGroupListSorted.bind(this); // Special 2018-02-14
     this.getProductList = this.getProductList.bind(this)
+  }
+  toggleModal = () => {
+    this.setState(({ isCalculating: state }) => ({ isCalculating: !state }))
+  }
+  closeModal = () => {
+    this.setState({ isCalculating: false })
   }
   _setContainerGroupListSorted () { this.setState ({ containerGroupListSorted: sortBySizes (this.state.containerGroupList) }) }
   saveContainerGroup (obj) {
@@ -408,6 +415,14 @@ class App extends Component {
     return (
       <div className='container-fluid' style={{marginBottom:'50px'}}>
 
+        {
+          this.state.isCalculating && (
+            <div className='fixed-modal-layout'>
+              <div className='modal'>Be Patient...</div>
+            </div>
+          )
+        }
+
         <h1>Cargo-React</h1>
         <div className='row'>
           <div className='col-lg-6'>
@@ -448,6 +463,8 @@ class App extends Component {
                   editContainerGroup={this.editContainerGroup}
                   updateProductListForContainerGroup={this._updateProductListForContainerGroup}
                   getProductListCombinations={this.getProductListCombinations}
+                  toggleModal={this.toggleModal}
+                  closeModal={this.closeModal}
                 />
           </div>
         </div>

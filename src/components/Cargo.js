@@ -16,7 +16,6 @@ class Cargo extends Component {
     this.state = {
       addProductFormOpened: false,
       productFormState: { name: '', length: '', width: '', height: '', weight: '', comment: '', addSize: '' },
-
     };
     this.updateProductFormState = this.updateProductFormState.bind(this);
     this.saveProduct = this.saveProduct.bind(this);
@@ -153,7 +152,13 @@ class Cargo extends Component {
         <span>ProductList for the Container Group.</span>
 
         <div className='text-center' style={{marginBottom:'5px'}}>
-          <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp='Add Product' />
+          {
+            this.props.productList.length < 8 ? (
+              <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp='Add Product' />
+            ) : (
+              <div>Demo: 8 products only</div>
+            )
+          }
         </div>
 
         <AddProductForm
