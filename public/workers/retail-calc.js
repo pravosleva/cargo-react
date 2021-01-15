@@ -61,7 +61,7 @@ self.onmessage = async ($event) => {
   //   self.postMessage({ count: newCounter });
   // }
   if ($event && $event.data && $event.data.msg === 'getCombinationsAnalysis') {
-    const t0 = Date.now()
+    const t0 = performance.now()
     const _result = []
     // const promiseList = []
     const queryParamsPackArr = []
@@ -74,6 +74,7 @@ self.onmessage = async ($event) => {
     }
 
     $event.data.combs.forEach((comb, i) => {
+      const t01 = new Date().getTime()
       // if (i === 0) console.log($event.data);
       const _urlData = getUrl({ ...$event.data.containerGroupData, productList: comb })
       const threejsLink = _urlData.url
@@ -98,21 +99,38 @@ self.onmessage = async ($event) => {
         // apiUrl: _result[i].apiUrl,
         threejsLink: _result[i].threejsLink,
       })
-      self.postMessage({ count: 1, actionCode: 'COUNT', containerGroupData: $event.data.containerGroupData, totalCombinations: $event.data.combs.length });
+      const t02 = new Date().getTime()
+      self.postMessage({
+        count: 1,
+        actionCode: 'COUNT',
+        containerGroupData: $event.data.containerGroupData,
+        totalCombinations: $event.data.combs.length,
+        iterationPerformanceInMilliseconds: t02 - t01,
+      });
     })
 
     let result = []
 
-    if (typeof info.minIndex !== 'undefined') {
+    if (typeof info.minIndex !== 'undefined' && typeof info.maxIndex !== 'undefined') {
       result = [_r[info.minIndex], _r[info.maxIndex]]
     } else {
       result = _r.sort((e1, e2) => e1.res.totalX - e2.res.totalX)
     }
-    const t1 = new Date().getTime()
+    const t1 = performance.now()
 
-    self.postMessage({ result, actionCode: 'RESULT', performanceInSeconds: (t1 - t0) / 1000, containerGroupData: $event.data.containerGroupData });
+    self.postMessage({
+      result,
+      actionCode: 'RESULT',
+      containerGroupData: $event.data.containerGroupData,
+      performanceInMilliseconds: t1 - t0,
+    });
   }
 };
+
+// function median(sequence) {
+//   sequence.sort();  // note that direction doesn't matter
+//   return sequence[Math.ceil(sequence.length / 2)];
+// }
 
 function incApple(countApple) {
     return countApple + 1;

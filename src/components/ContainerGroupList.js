@@ -11,20 +11,21 @@ function utf8_to_b64(str) {
 }
 const initialAnalysisState = {
   result: null,
-  performanceInSeconds: 0,
+  performanceInMilliseconds: 0,
+}
+const initialContainerGroupState = {
+  isLoading: false,
+  isCompleted: false,
+  totalCombinations: 0,
+  count: 0,
+  combinationsAnalysis: initialAnalysisState,
 }
 
 class ContainerGroupList extends Component {
   constructor(props){
     super(props);
     this.state = {
-      'tst-id': {
-        isLoading: false,
-        isCompleted: false,
-        totalCombinations: 0,
-        count: 0,
-        combinationsAnalysis: initialAnalysisState,
-      },
+      'tst-id': initialContainerGroupState,
     }
   }
   logProductListCombinations = (containerGroupId) => {
@@ -34,6 +35,7 @@ class ContainerGroupList extends Component {
     retailCalc.onmessage = ($event) => {
       if ($event && $event.data) {
         if ($event.data.actionCode === 'RESULT') {
+          // console.log('--- RESULT RECEIVED ---', $event.data.performanceInMilliseconds)
           this.setState((state) => ({
             ...state,
             [$event.data.containerGroupData.id]: {
@@ -59,6 +61,7 @@ class ContainerGroupList extends Component {
             },
           });
         } else if ($event.data.actionCode === 'COUNT') {
+          // console.log($event.data.iterationPerformanceInMilliseconds)
           this.updateContainerCalcState({ id: $event.data.containerGroupData.id, delta: { totalCombinations: $event.data.totalCombinations}, addCount: $event.data.count })
         }
       }
@@ -88,18 +91,15 @@ class ContainerGroupList extends Component {
         return ({
           ...state,
           [id]: {
+            ...initialContainerGroupState,
             isLoading: true,
-            isCompleted: false,
-            totalCombinations: 0,
-            count: 0,
-            combinationsAnalysis: initialAnalysisState,
           },
         })
       }
     })
   }
   resetContainerCalcState = (id, length) => {
-    this.updateContainerCalcState({ id, delta: { totalCombinations: length, isLoading: true, isCompleted: false, count: 0, combinationsAnalysis: initialAnalysisState } })
+    this.updateContainerCalcState({ id, delta: { ...initialContainerGroupState, totalCombinations: length, isLoading: true } })
   }
   logLinks = (containerGroupData) => {
     const { productList, id } = containerGroupData
@@ -163,8 +163,7 @@ class ContainerGroupList extends Component {
                       <div
                         // className='well'
                       >
-                        {/* <h4>Result: {container.combinationsAnalysis.performanceInSeconds} s</h4> */}
-                        <b><a rel="noopener noreferrer" href={container.combinationsAnalysis.result[0].threejsLink} target="_blank">{`Минимальная заполненность фуры: ${container.combinationsAnalysis.result[0].res.totalX.toFixed(1)} (погонных метров)`}</a></b>
+                        <b>({(container.combinationsAnalysis.performanceInMilliseconds / 60).toFixed(1)} sec) <a rel="noopener noreferrer" href={container.combinationsAnalysis.result[0].threejsLink} target="_blank">{`Минимальная заполненность фуры: ${container.combinationsAnalysis.result[0].res.totalX.toFixed(1)} (погонных метров)`}</a></b>
                         <hr />
                       </div>
                     )
@@ -177,6 +176,7 @@ class ContainerGroupList extends Component {
                         tmp={!!container && container.isLoading && 'Please wait'}
                         handlerClick={() => {
                           this.logLinks(e)
+                            // .then(() => {})
                             .catch((err) => {
                               show({
                                 text: typeof err === 'string' ? err : (err.message || 'No err.message'),
