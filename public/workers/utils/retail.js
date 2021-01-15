@@ -1,7 +1,14 @@
 // const retail = require('../../promventholod/calculate/retail')
 // require('../../public/javascripts/cargo-tools/retail.js')
 
-import { b64_to_utf8 } from './convert/b64-to-utf8'
+// import { b64_to_utf8 } from './convert/b64-to-utf8'
+
+function b64_to_utf8(str) {
+  if (!!window) {
+    return decodeURIComponent(escape(window.atob(str)));
+  }
+  return str;
+}
 
 var retail = (function(){
   return{
@@ -163,7 +170,7 @@ Full Z size= ${sizes.fullZ} mm`;
 //   return text;
 // }
 
-export const retail2 = ({
+const retail2 = ({
   productList: productListB64,
   wagonLength,
   wagonWidth,
@@ -216,23 +223,9 @@ export const retail2 = ({
         cargoHeight[id] = height
         cargoAddSize[id] = addSize
 
-        return ({
-          ...product,
-          cargoConfig,
-          horizontalOrientation: cargoConfig.horizontalOrientation,
-        })
-      })
-
-      products.forEach(({
-        id,
-        width,
-        length,
-        horizontalOrientation,
-        cargoConfig,
-      }) => {
         let config = cargoConfig.config;
         let _l_tpm = cargoLength[id];
-        switch(horizontalOrientation){
+        switch(cargoConfig.horizontalOrientation){
           case "byLength":
             cargoLength[id] = _l_tpm;
             cargoWidth[id] = width;
@@ -243,7 +236,35 @@ export const retail2 = ({
             break;
           default:;
         }
+
+        return ({
+          ...product,
+          cargoConfig,
+          horizontalOrientation: cargoConfig.horizontalOrientation,
+        })
       })
+
+      // products.forEach(({
+      //   id,
+      //   width,
+      //   length,
+      //   horizontalOrientation,
+      //   cargoConfig,
+      // }) => {
+      //   let config = cargoConfig.config;
+      //   let _l_tpm = cargoLength[id];
+      //   switch(horizontalOrientation){
+      //     case "byLength":
+      //       cargoLength[id] = _l_tpm;
+      //       cargoWidth[id] = width;
+      //       break;
+      //     case "byWidth":
+      //       cargoLength[id] = width;
+      //       cargoWidth[id] = _l_tpm;
+      //       break;
+      //     default:;
+      //   }
+      // })
 
       const _fact_inWagon = {
         result: products.reduce((acc, { cargoConfig }) => acc + cargoConfig.result, 0),

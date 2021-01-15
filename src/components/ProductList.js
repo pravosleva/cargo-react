@@ -11,8 +11,8 @@ class ProductList extends Component {
           function(e, i){ return <li key={e.id}>
             <span>
               <div className='btn-group' role='group'>
-                <Button iclassName='fa fa-pencil' handlerClick={this.props.editProduct.bind(this, e.id)} />
-                <Button iclassName='fa fa-close' bsBtnClassName='btn-default btn-danger-text' handlerClick={this.props.removeProduct.bind(this, e.id, true)} />
+                <Button disabled={this.props.isLoading} iclassName='fa fa-pencil' handlerClick={this.props.editProduct.bind(this, e.id)} />
+                <Button disabled={this.props.isLoading} iclassName='fa fa-close' bsBtnClassName='btn-default btn-danger-text' handlerClick={this.props.removeProduct.bind(this, e.id, true)} />
               </div>
             </span>
             <br />

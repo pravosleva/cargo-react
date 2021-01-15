@@ -152,13 +152,7 @@ class Cargo extends Component {
         <span>ProductList for the Container Group.</span>
 
         <div className='text-center' style={{marginBottom:'5px'}}>
-          {
-            this.props.productList.length < 8 ? (
-              <Button handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp='Add Product' />
-            ) : (
-              <div>Demo: 8 products only</div>
-            )
-          }
+          <Button disabled={this.props.isLoading} handlerClick={ this.addProductFormToggler.bind(this, true) } iclassName='fa fa-plus' tmp='Add Product' />
         </div>
 
         <AddProductForm
@@ -168,6 +162,7 @@ class Cargo extends Component {
           updateProductFormState={this.updateProductFormState}
           saveProduct={this.saveProduct} />
         <ProductList
+          isLoading={this.props.isLoading}
           productList={this.props.productList}
           removeProduct={this.removeProduct}
           editProduct={this.editProduct} />

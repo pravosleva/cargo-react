@@ -118,24 +118,24 @@ class App extends Component {
         name: '', length: '', width: '', height: '', carrying: '', productList:[], comment: '', hiringPrice: '', currency: ''
       },
 
+      // containerGroupList: [
+      //   {
+      //     id: 'уникальный_айди_конт_0',
+      //     name: 'Truck 13.6 m',
+      //     carrying: 20000,
+      //     length: 13600,
+      //     width: 2400,
+      //     height: 3000,
+      //     hiringPrice: 7500,
+      //     currency: 'EUR',
+      //     productList: [],
+      //   },
+      // ],
+      // TEST FOR EXAMPLE
       containerGroupList: [
         {
-          id: 'уникальный_айди_конт_0',
-          name: 'Truck 13.6 m',
-          carrying: 20000,
-          length: 13600,
-          width: 2400,
-          height: 3000,
-          hiringPrice: 7500,
-          currency: 'EUR',
-          productList: [],
-        },
-      ],
-      // TEST FOR EXAMPLE
-      /*containerGroupList: [
-        {
           id: 'уникальный_айди_rrer',
-          name: 'Group 1',
+          name: 'Group Example',
           carrying: 20000,
           length: 13600,
           width: 2400,
@@ -144,9 +144,9 @@ class App extends Component {
           currency: 'EUR',
           productList: [
             {
-              id: 'уникальный_айди_hdsfdfsffd',
-              name: 'PRODUCT 1',
-              length: 1200,
+              id: 'уникальный_айди_0',
+              name: 'PRODUCT 0',
+              length: 1000,
               width: 1000,
               height: 1000,
               weight: 400,
@@ -154,50 +154,89 @@ class App extends Component {
               addSize: 50
             },
             {
-              id: 'уникальный_айди_jhjgjhg',
-              name: 'PRODUCT 2',
-              length: 1000,
+              id: 'уникальный_айди_1',
+              name: 'PRODUCT 1',
+              length: 1100,
               width: 1100,
-              height: 1000,
+              height: 1100,
               weight: 400,
               comment: 'Кубик метр на метр на метр',
               addSize: 50
             },
             {
-              id: 'уникальный_айди_jhjgdjhg',
+              id: 'уникальный_айди_2',
+              name: 'PRODUCT 2',
+              length: 1200,
+              width: 1200,
+              height: 1200,
+              weight: 1000,
+              comment: 'Большой Кубик 2 x 2 x 2',
+              addSize: 50
+            },
+            {
+              id: 'уникальный_айди_3',
               name: 'PRODUCT 3',
-              length: 2000,
-              width: 2000,
-              height: 2000,
-              weight: 900,
+              length: 1300,
+              width: 1300,
+              height: 1300,
+              weight: 1000,
               comment: 'Большой Кубик 2 x 2 x 2',
               addSize: 50
             },
             {
-              id: 'уникальный_айди_jhjgdjhg',
-              name: 'PRODUCT 3.1',
-              length: 2000,
-              width: 2000,
-              height: 2000,
-              weight: 900,
-              comment: 'Большой Кубик 2 x 2 x 2',
-              addSize: 50
-            },
-            {
-              id: 'уникальный_айди_jhjg1jhg',
+              id: 'уникальный_айди_4',
               name: 'PRODUCT 4',
-              length: 10500,
-              width: 2100,
-              height: 2500,
-              weight: 19900,
-              comment: 'Явно одна единица в машине!',
+              length: 1400,
+              width: 1400,
+              height: 1400,
+              weight: 1000,
+              comment: 'Еще одна единица в машине!',
               addSize: 50
-            }
+            },
+            {
+              id: 'уникальный_айди_5',
+              name: 'PRODUCT 5',
+              length: 1500,
+              width: 1500,
+              height: 1500,
+              weight: 1000,
+              comment: 'tst 5',
+              addSize: 50
+            },
+            {
+              id: 'уникальный_айди_6',
+              name: 'PRODUCT 6',
+              length: 1600,
+              width: 1600,
+              height: 1600,
+              weight: 1000,
+              comment: 'tst 6',
+              addSize: 50
+            },
+            // {
+            //   id: 'уникальный_айди_7',
+            //   name: 'PRODUCT 7',
+            //   length: 1700,
+            //   width: 1700,
+            //   height: 1700,
+            //   weight: 1000,
+            //   comment: 'tst 7',
+            //   addSize: 50
+            // },
+            // {
+            //   id: 'уникальный_айди_8',
+            //   name: 'PRODUCT 8',
+            //   length: 1800,
+            //   width: 1800,
+            //   height: 1800,
+            //   weight: 1000,
+            //   comment: 'tst 8',
+            //   addSize: 50
+            // }
           ],
-          comment: 'Comment example mf'
+          comment: 'Тестовый расчет'
         }
       ],
-      */
 
       containerGroupListSorted: [],
       // TEST FOR EXAMPLE
